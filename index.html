@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dannina Manju Mukesh — CSE Undergraduate, Full-Stack Developer & AI Enthusiast. B.Tech student at Aditya College of Engineering with 9.06 CGPA, building intelligent software solutions.">
+    <meta name="keywords"
+        content="Manju Mukesh, Dannina, developer, portfolio, CSE, full stack, AI, Python, React, Aditya College">
+    <meta name="author" content="Dannina Manju Mukesh">
+    <title>MANJU — Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" stroke="currentColor" stroke-width="1.5"
+                        fill="none" />
+                    <polygon points="12,6 18,9.5 18,14.5 12,18 6,14.5 6,9.5" stroke="currentColor" stroke-width="1"
+                        fill="currentColor" opacity="0.3" />
+                </svg>
+            </div>
+            <div class="loader-text">MANJU</div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Dynamic Background -->
+    <div class="aurora-bg">
+        <canvas id="particle-canvas"></canvas>
+        <div class="color-wash"></div>
+        <div class="cursor-glow" id="cursor-glow"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" id="nav-logo">
+                <div class="logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" stroke="currentColor"
+                            stroke-width="1.5" fill="none" />
+                        <polygon points="12,6 18,9.5 18,14.5 12,18 6,14.5 6,9.5" stroke="currentColor" stroke-width="1"
+                            fill="currentColor" opacity="0.3" />
+                    </svg>
+                </div>
+                <span class="logo-name">Manju</span>
+            </a>
+            <div class="nav-pills" id="nav-pills">
+                <a href="#hero" class="nav-pill active" data-section="hero">Home</a>
+                <a href="#projects" class="nav-pill" data-section="projects">Projects</a>
+                <a href="#skills" class="nav-pill" data-section="skills">Skills</a>
+                <a href="#experience" class="nav-pill" data-section="experience">Journey</a>
+                <a href="#contact" class="nav-pill" data-section="contact">Contact</a>
+                <div class="pill-indicator" id="pill-indicator"></div>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+            </button>
+            <button class="nav-burger" id="nav-burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#projects" class="mobile-link">Projects</a>
+        <a href="#skills" class="mobile-link">Skills</a>
+        <a href="#experience" class="mobile-link">Journey</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="hero">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-tag">
+                    <span class="tag-dot"></span>
+                    <span>Open to Internships & Opportunities</span>
+                </div>
+                <p class="hero-intro">I'm</p>
+                <h1 class="hero-name">
+                    <span class="name-line">Manju</span>
+                    <span class="name-line name-sub">Mukesh</span>
+                </h1>
+                <p class="hero-desc">
+                    CSE undergraduate (<strong>9.06 CGPA</strong>) with proven full-stack development skills —
+                    building production-grade web apps with <strong>Python, Flask, React.js, MongoDB</strong>.
+                    Experienced in integrating LLMs (Google Gemini AI), biometric analytics, and
+                    delivering end-to-end software solutions. Seeking a <strong>Software Dev / AI internship</strong>.
+                </p>
+                <div class="hero-roles">
+                    <span class="role-prefix">I build </span>
+                    <span class="role-typewriter" id="typewriter"></span>
+                    <span class="typewriter-cursor">|</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="Manju_Mukesh_Resume_ATS.pdf" target="_blank" class="btn-cv">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>View CV</span>
+                    </a>
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/manjumukeshdannina" target="_blank" class="social-icon"
+                            aria-label="LinkedIn" id="hero-linkedin">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="social-icon" aria-label="GitHub"
+                            id="hero-github">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </svg>
+                        </a>
+                        <a href="mailto:24P31a0585@acet.ac.in" class="social-icon" aria-label="Email" id="hero-email">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-num" data-target="9.06" data-decimal="true">0</span>
+                        <span class="stat-lbl">CGPA</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="hero-stat">
+                        <span class="stat-num" data-target="5">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-lbl">Certifications</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="hero-stat">
+                        <span class="stat-num" data-target="2">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-lbl">Major Projects</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="hero-stat">
+                        <span class="stat-num" data-target="3">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-lbl">Hackathon Wins</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-photo-wrapper">
+                    <div class="photo-glow"></div>
+                    <div class="hero-photo">
+                        <img src="manju-photo.png" alt="Dannina Manju Mukesh — CSE Developer" class="photo-img">
+                    </div>
+                    <div class="orbit-ring">
+                        <div class="orbit-dot"></div>
+                    </div>
+                    <div class="float-chip chip-1">
+                        <svg class="chip-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                        <span>9.10 CGPA</span>
+                    </div>
+                    <div class="float-chip chip-2">
+                        <svg class="chip-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        <span>Full Stack</span>
+                    </div>
+                    <div class="float-chip chip-3">
+                        <svg class="chip-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="10" rx="2" />
+                            <circle cx="12" cy="5" r="2" />
+                            <path d="M12 7v4" />
+                            <line x1="8" y1="16" x2="8.01" y2="16" />
+                            <line x1="16" y1="16" x2="16.01" y2="16" />
+                        </svg>
+                        <span>AI/ML</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-cue">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">01</span>
+                <h2 class="sec-title">Projects</h2>
+                <p class="sec-sub">Production-grade applications I've architected & shipped</p>
+            </div>
+            <div class="projects-masonry">
+                <!-- Project 1: SkillStack AI -->
+                <article class="proj-card proj-large" id="proj-1">
+                    <div class="proj-visual proj-visual-img">
+                        <img src="project-skillstack.png" alt="SkillStack AI — AI-Powered Career Launchpad"
+                            class="proj-screenshot">
+                        <div class="proj-img-overlay"></div>
+                        <div class="proj-badges">
+                            <span class="proj-badge">Featured</span>
+                            <span class="proj-badge badge-ai">AI/ML</span>
+                        </div>
+                    </div>
+                    <div class="proj-body">
+                        <span class="proj-type">Full-Stack AI Platform</span>
+                        <h3 class="proj-name">SkillStack AI — Career Launchpad</h3>
+                        <p class="proj-desc">
+                            A full-stack placement preparation platform with 11 Flask Blueprint modules —
+                            covering AI mock interviews, resume building, coding assessments, and live job discovery,
+                            all powered by Google Gemini AI with a 4-tier fallback chain.
+                        </p>
+                        <div class="proj-highlights">
+                            <div class="proj-highlight">
+                                <span class="ph-icon">🧠</span>
+                                <span>MediaPipe FaceMesh for real-time biometric analytics (blink, gaze)</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">📝</span>
+                                <span>5-step RAG pipeline → 88–98% ATS resume compatibility</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">🔗</span>
+                                <span>Multi-platform coding profile aggregator (LeetCode, Codeforces, GFG, etc.)</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">⚡</span>
+                                <span>4-tier AI fallback: Gemini → OpenAI → OpenRouter → NVIDIA NIM</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">🔐</span>
+                                <span>Firebase Phone OTP, SHA-256 hashing, 20+ pytest test cases</span>
+                            </div>
+                        </div>
+                        <div class="proj-stack">
+                            <span>Python</span><span>Flask</span><span>MongoDB Atlas</span><span>Gemini
+                                AI</span><span>Firebase</span><span>React.js</span><span>MediaPipe</span><span>LangChain</span>
+                        </div>
+                        <div class="proj-links">
+                            <a href="https://github.com/" target="_blank" class="proj-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                                </svg>
+                                Source Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Student Affairs Portal -->
+                <article class="proj-card proj-large" id="proj-2">
+                    <div class="proj-visual proj-visual-img">
+                        <img src="project-portal.png" alt="Centralized Student Affairs Dashboard"
+                            class="proj-screenshot">
+                        <div class="proj-img-overlay"></div>
+                        <div class="proj-badges">
+                            <span class="proj-badge">Full-Stack</span>
+                        </div>
+                    </div>
+                    <div class="proj-body">
+                        <span class="proj-type">Administrative Dashboard</span>
+                        <h3 class="proj-name">Centralized Student Affairs & Club Portal</h3>
+                        <p class="proj-desc">
+                            A full-stack administrative dashboard centralizing university club management,
+                            extension activities, and SAC operations for the Dean of Student Affairs —
+                            eliminating fragmented spreadsheet-based workflows.
+                        </p>
+                        <div class="proj-highlights">
+                            <div class="proj-highlight">
+                                <span class="ph-icon">📊</span>
+                                <span>Chart.js analytics with real-time multi-dimensional filtering</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">🔐</span>
+                                <span>RBAC: permission-scoped views for Dean & Coordinator roles</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">📁</span>
+                                <span>RESTful file-handling APIs for dynamic Excel data ingestion</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">📄</span>
+                                <span>Automated NAAC-compliant reporting with PDF/Excel export</span>
+                            </div>
+                        </div>
+                        <div class="proj-stack">
+                            <span>Python</span><span>Flask</span><span>React.js</span><span>Tailwind
+                                CSS</span><span>MongoDB</span><span>Chart.js</span><span>SheetJS</span>
+                        </div>
+                        <div class="proj-links">
+                            <a href="https://github.com/" target="_blank" class="proj-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                                </svg>
+                                Source Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Portfolio Website -->
+                <article class="proj-card proj-large" id="proj-3">
+                    <div class="proj-visual proj-visual-img">
+                        <img src="portfolio.png" alt="Premium Portfolio Website" class="proj-screenshot"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%231e293b\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'24\' fill=\'%2394a3b8\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Portfolio Screenshot</text></svg>'">
+                        <div class="proj-img-overlay"></div>
+                        <div class="proj-badges">
+                            <span class="proj-badge">Front-End</span>
+                        </div>
+                    </div>
+                    <div class="proj-body">
+                        <span class="proj-type">Web Application</span>
+                        <h3 class="proj-name">Premium Developer Portfolio</h3>
+                        <p class="proj-desc">
+                            A highly interactive, corporate-ready developer portfolio designed to showcase projects with
+                            a premium aesthetic. Features an interactive particle engine, custom cursor, glassmorphism
+                            UI, and 3D tilt effects.
+                        </p>
+                        <div class="proj-highlights">
+                            <div class="proj-highlight">
+                                <span class="ph-icon">🎨</span>
+                                <span>Advanced CSS3 animations, glassmorphism, and custom UI design tokens</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">⚡</span>
+                                <span>Custom vanilla JavaScript physics engine for interactive background
+                                    particles</span>
+                            </div>
+                            <div class="proj-highlight">
+                                <span class="ph-icon">📱</span>
+                                <span>Fully responsive layout with smooth scroll and reveal micro-interactions</span>
+                            </div>
+                        </div>
+                        <div class="proj-stack">
+                            <span>HTML5</span><span>CSS3</span><span>Vanilla JS</span><span>Canvas API</span>
+                        </div>
+                        <div class="proj-links">
+                            <a href="#" class="proj-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                                </svg>
+                                Source Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">02</span>
+                <h2 class="sec-title">My <span style="color:#fbbf24;-webkit-text-fill-color:#fbbf24">Skills</span></h2>
+                <p class="sec-sub">Hover to reveal proficiency — technologies I build with</p>
+            </div>
+
+            <!-- Skills Glass Container -->
+            <div class="skills-glass-box">
+                <div class="skills-flip-grid">
+
+                    <!-- Python -->
+                    <div class="flip-card" data-level="90">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <linearGradient id="py1" x1="70.25" x2="170.88" y1="1237.63" y2="1151.97"
+                                            gradientTransform="matrix(.563 0 0 -.568 -29.22 707.19)"
+                                            gradientUnits="userSpaceOnUse">
+                                            <stop offset="0" stop-color="#5A9FD4" />
+                                            <stop offset="1" stop-color="#306998" />
+                                        </linearGradient>
+                                        <linearGradient id="py2" x1="209.46" x2="130.23" y1="1098.16" y2="1200.44"
+                                            gradientTransform="matrix(.563 0 0 -.568 -29.22 707.19)"
+                                            gradientUnits="userSpaceOnUse">
+                                            <stop offset="0" stop-color="#FFD43B" />
+                                            <stop offset="1" stop-color="#FFE873" />
+                                        </linearGradient>
+                                        <path fill="url(#py1)"
+                                            d="M63.39 1.81c-4.07.2-7.95.73-11.36 1.49-9.98 2.24-11.79 6.93-11.79 15.58v11.42h23.57v3.81H27.36c-6.85 0-12.85 4.12-14.73 11.94-2.16 8.95-2.26 14.54 0 23.89 1.68 6.96 5.68 11.94 12.53 11.94h8.1V69.18c0-7.78 6.73-14.63 14.73-14.63h23.55c6.55 0 11.79-5.4 11.79-11.97V18.88c0-6.39-5.39-11.2-11.79-12.08-4.04-.56-8.24-.79-12.15-.99zm-12.74 8.67c2.44 0 4.42 2.01 4.42 4.48s-1.98 4.45-4.42 4.45c-2.45 0-4.42-1.98-4.42-4.45s1.97-4.48 4.42-4.48z" />
+                                        <path fill="url(#py2)"
+                                            d="M91.68 32.11v12.45c0 8.12-6.93 15.14-14.73 15.14H53.4c-6.44 0-11.79 5.52-11.79 11.97v22.42c0 6.39 5.55 10.15 11.79 11.97 7.48 2.18 14.65 2.57 23.56 0 5.92-1.71 11.79-5.16 11.79-11.97V82.67H65.19v-3.81h35.34c6.85 0 9.4-4.78 11.79-11.94 2.47-7.38 2.36-14.48 0-23.89-1.7-6.78-4.94-11.94-11.79-11.94H91.68zm-13.19 57.6c2.45 0 4.42 1.98 4.42 4.45s-1.98 4.48-4.42 4.48c-2.44 0-4.42-2.01-4.42-4.48s1.98-4.45 4.42-4.45z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Python</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:90" />
+                                </svg>
+                                <span class="flip-percent">90%</span>
+                                <span class="flip-label">Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Java -->
+                    <div class="flip-card" data-level="85">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#0074BD"
+                                            d="M47.62 95.63s-3.04 1.77 2.17 2.37c6.3.72 9.52.62 16.47-.7 0 0 1.83 1.14 4.38 2.14-15.56 6.67-35.22-.39-22.02-3.81zm-1.83-8.33s-3.41 2.52 1.8 3.06c6.73.7 12.04.76 21.24-1.03 0 0 1.27 1.29 3.27 1.99-18.81 5.5-39.76.43-26.31-4.02z" />
+                                        <path fill="#EA2D2E"
+                                            d="M69.8 61.71c3.83 4.41-1.01 8.38-1.01 8.38s9.74-5.03 5.27-11.33c-4.17-5.88-7.38-8.81 9.96-18.89 0 0-27.2 6.79-14.22 21.84z" />
+                                        <path fill="#0074BD"
+                                            d="M102.28 105.38s2.25 1.85-2.47 3.28c-8.97 2.71-37.32 3.53-45.21.11-2.84-1.23 2.48-2.94 4.15-3.3 1.74-.38 2.74-.31 2.74-.31-3.15-2.22-20.37 4.36-8.75 6.24 31.67 5.12 57.73-2.3 49.54-6.02zM49.78 68.07s-14.43 3.43-5.11 4.67c3.93.53 11.77.41 19.09-.21 5.98-.5 11.98-1.58 11.98-1.58s-2.11.9-3.63 1.94c-14.67 3.86-43.02 2.06-34.86-1.88 6.9-3.33 12.53-2.94 12.53-2.94zm25.94 14.5c14.91-7.75 8.02-15.19 3.2-14.19-1.17.25-1.7.46-1.7.46s.44-.68 1.27-.98c9.47-3.33 16.76 9.82-3.07 15.03 0 0 .23-.21.3-.32z" />
+                                        <path fill="#EA2D2E"
+                                            d="M80.48 1s8.27 8.27-7.84 20.97c-12.9 10.17-2.94 15.97 0 22.59-7.53-6.79-13.05-12.77-9.34-18.35C68.72 18.59 83.82 13.99 80.48 1z" />
+                                        <path fill="#0074BD"
+                                            d="M51.16 117.97c14.31.92 36.28-.51 36.81-7.29 0 0-1 2.56-11.82 4.6-12.2 2.3-27.27 2.03-36.19.56 0 0 1.83 1.51 11.2 2.13z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Java</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:85" />
+                                </svg>
+                                <span class="flip-percent">85%</span>
+                                <span class="flip-label">Java</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C / C++ -->
+                    <div class="flip-card" data-level="82">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#659AD2"
+                                            d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z" />
+                                        <path fill="#03599C"
+                                            d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z" />
+                                        <path fill="#fff"
+                                            d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 53h4.9l-1.2 4.2h3.8l1.2-4.2h4.8l-1.2 4.2h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 4.2h-4.9l1.2-4.2h-3.8l-1.2 4.2h-4.8l1.2-4.2H93v-4.7h3.3zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">C++</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:82" />
+                                </svg>
+                                <span class="flip-percent">82%</span>
+                                <span class="flip-label">C / C++</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="flip-card" data-level="85">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#F0DB4F" d="M1.41 1.41h125.18v125.18H1.41z" />
+                                        <path fill="#323330"
+                                            d="M116.22 96.22c-1.18-7.38-5.97-13.58-20.12-19.35-4.93-2.3-10.41-3.93-12.04-7.65-.61-2.27-.71-3.51-.31-4.89.93-3.55 4.54-4.62 7.53-3.62 1.93.65 3.72 2.3 4.83 4.96 5.12-3.34 5.12-3.34 8.69-5.6-1.33-2.09-2.01-3.02-2.9-3.87-3.2-3.58-7.04-5.4-13.59-5.24l-3.39.42c-3.24.75-6.32 2.37-8.12 4.62-5.53 6.06-3.94 16.63 2.76 20.99 6.6 4.79 16.27 5.83 17.51 10.34 1.18 5.42-4 7.16-9.05 6.53-3.73-.76-5.79-2.74-8.05-6.27l-9.04 5.22c1.03 2.37 2.17 3.41 3.87 5.49 8.18 8.18 28.61 7.76 32.27-4.67.13-.43 1.09-3.22.15-7.41zm-46.72-44.78h-11.14c0 9.5-.05 18.96-.05 28.47 0 6.05.32 11.59-.37 13.29-1.12 3.59-4.02 4.67-6.71 4.1-2.72-.6-4.08-2.21-5.68-4.59l-9.04 5.49c1.52 3.14 3.76 5.84 6.81 7.58 4.54 2.59 10.63 3.42 17.04 1.92 4.16-1.33 7.76-4.16 9.63-8.18 2.74-5.64 2.15-12.53 2.12-20.21.07-9.34 0-18.68 0-28.06l.39.19z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">JavaScript</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:85" />
+                                </svg>
+                                <span class="flip-percent">85%</span>
+                                <span class="flip-label">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- React -->
+                    <div class="flip-card" data-level="80">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <g fill="#61DAFB">
+                                            <circle cx="64" cy="64" r="11.4" />
+                                            <path
+                                                d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2 2.3-4.1 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.1 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2-2.3 4.1-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7.2 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7.2 69.6 7.2 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9.9-30.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22 10 22 15.6 0 4.7-5.8 9.7-15.6 13.4z" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <span class="flip-name">React</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:80" />
+                                </svg>
+                                <span class="flip-percent">80%</span>
+                                <span class="flip-label">React</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node.js -->
+                    <div class="flip-card" data-level="78">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#83CD29"
+                                            d="M112.77 30.48L68.49 4.87c-2.79-1.62-6.19-1.62-8.98 0L15.23 30.48C12.43 32.1 10.64 35.13 10.64 38.37v51.24c0 3.24 1.79 6.27 4.59 7.89l44.28 25.61c2.79 1.62 6.19 1.62 8.98 0l44.28-25.61c2.8-1.62 4.59-4.65 4.59-7.89V38.37c0-3.24-1.79-6.27-4.59-7.89" />
+                                        <path fill="#404137"
+                                            d="M79.61 85.17c0 0-4.84 2.82-9.18.37-4.34-2.45-3.97-3.97-3.97-3.97l3.97 2.28 5.58-3.23v-25.37L64 48.62l-12.01 6.63v25.37l5.58 3.23 3.97-2.28s.37 1.52-3.97 3.97c-4.34 2.45-9.18-.37-9.18-.37L42 81.8V55.25l22-12.73 22 12.73V81.8l-6.39 3.37z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Node.js</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:78" />
+                                </svg>
+                                <span class="flip-percent">78%</span>
+                                <span class="flip-label">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MongoDB -->
+                    <div class="flip-card" data-level="88">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#439934"
+                                            d="M90.49 57.54c-3.03-14.21-11.63-18.72-14.24-22.72C73.43 30.54 71 25.44 68.62 19c-.47 2.15-.78 3.62-2.01 5.26C62.21 30.5 48.97 37.93 46.02 49.61c-3.47 13.71 2.25 23.73 7.38 29.17.42-.69.81-1.41 1.24-2.07.25-3.85 1.06-7.63 3.04-11.04 2.1-3.61 5.38-6.24 9.01-8.13-.12.65-.37 1.58-.45 2.23-1.2 1.7-2.52 3.35-3.35 5.28-1.32 3.06-1.55 6.55-1.55 9.87 0 5.15.83 8.01 2.43 12.78.6 1.79 1.33 3.53 2.28 5.2.48.84 2.58 4.07 2.15 4.78l1.12 2.62s.33-4.31.48-5.57c.47-3.91 1.28-7.5 1.31-11.52 4.81-1.92 8.15-5.31 10.78-9.7 2.78-4.64 3.9-10.02 3.94-15.36.02-2.75-.36-5.24-.74-7.66z" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#45A538"
+                                            d="M67.82 109.9c-.37-3.12-1.53-6.12-2.17-9.15-.07-.33-.21-2.16-.59-2.16-.3.42-.19 2.97-.24 3.48-.2 1.97-.5 3.95-.92 5.89-.36 1.65-.92 6.07-.92 6.07s1.76-1.14 2.44-1.72c1.25-1.06 1.85-1.46 2.4-2.41z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">MongoDB</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:88" />
+                                </svg>
+                                <span class="flip-percent">88%</span>
+                                <span class="flip-label">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HTML5 -->
+                    <div class="flip-card" data-level="92">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#E44D26" d="M19.04 113.3L9.18 2h109.65l-9.87 111.28L63.93 126z" />
+                                        <path fill="#F16529" d="M64 117.15l35.55-9.86 8.45-94.63H64z" />
+                                        <path fill="#EBEBEB"
+                                            d="M64 52.45H45.79l-1.26-14.13H64V24.57H29.02l.33 3.69 3.39 38.01H64zm0 35.16l-.07.02-15.32-4.14-0.98-10.97H33.82l1.93 21.61 28.18 7.82.07-.02z" />
+                                        <path fill="#fff"
+                                            d="M63.95 52.45v13.75h16.95l-1.6 17.87-15.35 4.14v14.24l28.2-7.82.21-2.3 3.23-36.17.33-3.71H63.95zm0-27.88v13.75h33.91l.28-3.13.63-7.02.33-3.6H63.95z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">HTML5</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:92" />
+                                </svg>
+                                <span class="flip-percent">92%</span>
+                                <span class="flip-label">HTML5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Row 2 -->
+                <div class="skills-flip-grid">
+
+                    <!-- CSS3 -->
+                    <div class="flip-card" data-level="90">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#1572B6" d="M18.81 113.27L9.03 2h109.94l-9.79 111.25L64.08 126z" />
+                                        <path fill="#33A9DC" d="M64 117.09l35.55-9.86 8.37-93.72H64z" />
+                                        <path fill="#fff"
+                                            d="M64 52.48H45.79l-1.26-14.12H64V24.57H29.02l.33 3.69 3.39 38.04H64zm0 35.17l-.07.02-15.32-4.14-.98-10.97H33.82l1.93 21.61 28.18 7.82.07-.02z" />
+                                        <path fill="#EBEBEB"
+                                            d="M63.95 52.48v13.79h16.95l-1.6 17.87-15.35 4.14v14.24l28.2-7.82.21-2.3 3.23-36.17.33-3.75H63.95zm0-27.91v13.79h33.91l.28-3.13.63-7.02.33-3.64H63.95z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">CSS3</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:90" />
+                                </svg>
+                                <span class="flip-percent">90%</span>
+                                <span class="flip-label">CSS3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flask -->
+                    <div class="flip-card" data-level="82">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#ccc"
+                                            d="M53.39 17.81c-2.44-.07-4.46.45-5.6 1.88-.39.49-.74 1.06-1.06 1.72l.07.1c.92-.75 2.71-1.22 3.7-1.32 5.7-.55 11.14 3.62 12.78 3.36 1.6-.25-2.39-5.62-9.89-5.74zm14.93 3.62c-.73 1.48-1.05 2.94-1.14 4.24 3.36 2.47 7.33 3.42 8.57 3.25 1.6-.22-2.42-5.62-7.43-7.49zm-37.3 11.63c-3.93 6.54-6.56 14.66-6.81 24.48-.58 22.77 10.29 43.21 33.05 53.88 0 0 .91 1.42-.77.72-13.78-5.74-27.29-20.68-30.9-38.28-3.07-14.93-1.11-28.42 5.43-40.8zm23.53-3.93c-3.09-.29-5.72.78-7.55 2.25-2.52 2.02-3.94 4.87-4.85 7.72 2.31-.06 5.47-.82 7.84-2.13 2.97-1.65 4.44-5.14 4.56-7.84z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Flask</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:82" />
+                                </svg>
+                                <span class="flip-percent">82%</span>
+                                <span class="flip-label">Flask</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git -->
+                    <div class="flip-card" data-level="85">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#F34F29"
+                                            d="M124.74 58.4L69.6 3.26c-3.11-3.11-8.16-3.11-11.27 0l-11.45 11.45 14.51 14.51c3.37-1.14 7.23-.41 9.91 2.27 2.7 2.7 3.42 6.6 2.24 9.98l13.98 13.98c3.38-1.17 7.27-.46 9.97 2.24 3.78 3.78 3.78 9.9 0 13.68-3.78 3.78-9.9 3.78-13.68 0-2.84-2.84-3.53-7.02-2.08-10.53L68.57 47.38v29.22c.92.45 1.79 1.06 2.56 1.83 3.78 3.78 3.78 9.9 0 13.68-3.78 3.78-9.9 3.78-13.68 0-3.78-3.78-3.78-9.9 0-13.68.96-.96 2.08-1.69 3.27-2.18V46.69c-1.19-.49-2.31-1.22-3.27-2.18-2.87-2.87-3.53-7.09-2.04-10.62L41.08 19.56 3.26 57.38c-3.11 3.11-3.11 8.16 0 11.27l55.14 55.14c3.11 3.11 8.16 3.11 11.27 0l54.93-54.93c3.11-3.11 3.11-8.16.14-11.46z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Git</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:85" />
+                                </svg>
+                                <span class="flip-percent">85%</span>
+                                <span class="flip-label">Git</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SQL -->
+                    <div class="flip-card" data-level="85">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#e48e00"
+                                            d="M64 8C37.5 8 16 16.16 16 26.29v75.42C16 111.84 37.5 120 64 120s48-8.16 48-18.29V26.29C112 16.16 90.5 8 64 8z" />
+                                        <ellipse fill="#f29111" cx="64" cy="26.29" rx="48" ry="18.29" />
+                                        <path fill="#fff" opacity=".3"
+                                            d="M64 14c-21.39 0-38.71 5.74-42.18 13.17C20.6 24.76 16 19.61 16 26.29c0 10.13 21.5 18.29 48 18.29s48-8.16 48-18.29c0-6.68-4.6-1.53-5.82 1.12C102.71 19.74 85.39 14 64 14z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">SQL</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:85" />
+                                </svg>
+                                <span class="flip-percent">85%</span>
+                                <span class="flip-label">Oracle SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tailwind -->
+                    <div class="flip-card" data-level="78">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <path fill="#38bdf8"
+                                            d="M64.01 25.6c-17.07 0-27.73 8.53-32 25.6 6.4-8.53 13.87-11.73 22.4-9.6 4.87 1.22 8.35 4.75 12.2 8.67C73.17 57 80.67 64.8 96.01 64.8c17.07 0 27.73-8.53 32-25.6-6.4 8.53-13.87 11.73-22.4 9.6-4.87-1.22-8.35-4.75-12.2-8.67C86.85 33.4 79.35 25.6 64.01 25.6zM32.01 64.8c-17.07 0-27.73 8.53-32 25.6 6.4-8.53 13.87-11.73 22.4-9.6 4.87 1.22 8.35 4.75 12.2 8.67C41.17 96.2 48.67 104 64.01 104c17.07 0 27.73-8.53 32-25.6-6.4 8.53-13.87 11.73-22.4 9.6-4.87-1.22-8.35-4.75-12.2-8.67C54.85 72.6 47.35 64.8 32.01 64.8z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">Tailwind</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:78" />
+                                </svg>
+                                <span class="flip-percent">78%</span>
+                                <span class="flip-label">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REST APIs -->
+                    <div class="flip-card" data-level="80">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 64 64" width="48" height="48">
+                                        <path fill="#22d3ee"
+                                            d="M32 8L8 20v24l24 12 24-12V20L32 8zm0 4l20 10v20L32 52 12 42V22l20-10z" />
+                                        <path fill="#22d3ee"
+                                            d="M32 16l-14 7v14l14 7 14-7V23l-14-7zm0 4l10 5v10L32 40l-10-5V25l10-5z" />
+                                    </svg>
+                                </div>
+                                <span class="flip-name">REST APIs</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:80" />
+                                </svg>
+                                <span class="flip-percent">80%</span>
+                                <span class="flip-label">REST APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub -->
+                    <div class="flip-card" data-level="88">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="flip-icon">
+                                    <svg viewBox="0 0 128 128" width="48" height="48">
+                                        <g fill="#e0e0e0">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M64 5.1C29.5 5.1 1.6 33 1.6 67.5c0 27.6 17.9 51 42.7 59.3 3.1.6 4.3-1.4 4.3-3 0-1.5-.1-6.4-.1-11.7-15.7 2.9-19.8-3.8-21-7.3-.7-1.8-3.8-7.3-6.4-8.8-2.2-1.2-5.3-4.1-.1-4.2 4.9-.1 8.4 4.5 9.6 6.4 5.6 9.5 14.6 6.8 18.2 5.2.6-4.1 2.2-6.8 4-8.4-13.9-1.6-28.4-7-28.4-31 0-6.8 2.4-12.5 6.4-16.9-.6-1.6-2.8-8 .6-16.7 0 0 5.2-1.7 17.1 6.4 5-1.4 10.3-2.1 15.6-2.1 5.3 0 10.6.7 15.6 2.1 11.9-8.1 17.1-6.4 17.1-6.4 3.4 8.7 1.2 15.1.6 16.7 4 4.4 6.4 10 6.4 16.9 0 24.1-14.6 29.4-28.5 31 2.2 1.9 4.2 5.7 4.2 11.5 0 8.3-.1 15-.1 17.1 0 1.7 1.1 3.6 4.3 3 24.8-8.3 42.6-31.8 42.6-59.4C126.4 33 98.5 5.1 64 5.1z" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <span class="flip-name">GitHub</span>
+                            </div>
+                            <div class="flip-back">
+                                <svg class="progress-ring" viewBox="0 0 120 120">
+                                    <circle class="ring-bg" cx="60" cy="60" r="50" />
+                                    <circle class="ring-fill" cx="60" cy="60" r="50" style="--percent:88" />
+                                </svg>
+                                <span class="flip-percent">88%</span>
+                                <span class="flip-label">GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Core CS Concepts Pills -->
+            <div class="concepts-section">
+                <h3 class="concepts-title">Core CS Concepts</h3>
+                <div class="concepts-pills">
+                    <span class="concept-pill">Data Structures & Algorithms</span>
+                    <span class="concept-pill">Object-Oriented Programming</span>
+                    <span class="concept-pill">DBMS</span>
+                    <span class="concept-pill">SDLC</span>
+                    <span class="concept-pill">Problem Solving</span>
+                    <span class="concept-pill">Debugging</span>
+                    <span class="concept-pill">Cloud & AI Foundations</span>
+                </div>
+            </div>
+
+            <!-- Tech Marquee -->
+            <div class="tech-marquee">
+                <div class="marquee-track">
+                    <div class="marquee-content">
+                        <span>Python</span><span class="marquee-dot">✦</span>
+                        <span>JavaScript</span><span class="marquee-dot">✦</span>
+                        <span>React.js</span><span class="marquee-dot">✦</span>
+                        <span>Flask</span><span class="marquee-dot">✦</span>
+                        <span>MongoDB</span><span class="marquee-dot">✦</span>
+                        <span>Node.js</span><span class="marquee-dot">✦</span>
+                        <span>HTML5</span><span class="marquee-dot">✦</span>
+                        <span>CSS3</span><span class="marquee-dot">✦</span>
+                        <span>Java</span><span class="marquee-dot">✦</span>
+                        <span>C++</span><span class="marquee-dot">✦</span>
+                        <span>Git</span><span class="marquee-dot">✦</span>
+                        <span>Tailwind</span><span class="marquee-dot">✦</span>
+                        <span>REST APIs</span><span class="marquee-dot">✦</span>
+                        <span>Firebase</span><span class="marquee-dot">✦</span>
+                        <span>Gemini AI</span><span class="marquee-dot">✦</span>
+                        <span>LangChain</span><span class="marquee-dot">✦</span>
+                    </div>
+                    <div class="marquee-content" aria-hidden="true">
+                        <span>Python</span><span class="marquee-dot">✦</span>
+                        <span>JavaScript</span><span class="marquee-dot">✦</span>
+                        <span>React.js</span><span class="marquee-dot">✦</span>
+                        <span>Flask</span><span class="marquee-dot">✦</span>
+                        <span>MongoDB</span><span class="marquee-dot">✦</span>
+                        <span>Node.js</span><span class="marquee-dot">✦</span>
+                        <span>HTML5</span><span class="marquee-dot">✦</span>
+                        <span>CSS3</span><span class="marquee-dot">✦</span>
+                        <span>Java</span><span class="marquee-dot">✦</span>
+                        <span>C++</span><span class="marquee-dot">✦</span>
+                        <span>Git</span><span class="marquee-dot">✦</span>
+                        <span>Tailwind</span><span class="marquee-dot">✦</span>
+                        <span>REST APIs</span><span class="marquee-dot">✦</span>
+                        <span>Firebase</span><span class="marquee-dot">✦</span>
+                        <span>Gemini AI</span><span class="marquee-dot">✦</span>
+                        <span>LangChain</span><span class="marquee-dot">✦</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CERTIFICATIONS ==================== -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">03</span>
+                <h2 class="sec-title">Certifications</h2>
+                <p class="sec-sub">Industry-recognized credentials</p>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card" id="cert-1">
+                    <div class="cert-icon" style="--cert-color:#f80000">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 15l-2 5l-1-3l-3-1l5-2z" />
+                            <path d="M12 15l2 5l1-3l3-1l-5-2z" />
+                            <circle cx="12" cy="9" r="6" />
+                        </svg>
+                    </div>
+                    <div class="cert-body">
+                        <h4>Oracle Cloud Infrastructure 2025</h4>
+                        <p class="cert-sub">AI Foundations Associate</p>
+                        <span class="cert-org">Oracle Corporation</span>
+                    </div>
+                </div>
+                <div class="cert-card" id="cert-2">
+                    <div class="cert-icon" style="--cert-color:#e34f26">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 15l-2 5l-1-3l-3-1l5-2z" />
+                            <path d="M12 15l2 5l1-3l3-1l-5-2z" />
+                            <circle cx="12" cy="9" r="6" />
+                        </svg>
+                    </div>
+                    <div class="cert-body">
+                        <h4>IT Specialist – HTML & CSS</h4>
+                        <p class="cert-sub">Certified Specialist</p>
+                        <span class="cert-org">Pearson Group</span>
+                    </div>
+                </div>
+                <div class="cert-card" id="cert-3">
+                    <div class="cert-icon" style="--cert-color:#4285f4">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 15l-2 5l-1-3l-3-1l5-2z" />
+                            <path d="M12 15l2 5l1-3l3-1l-5-2z" />
+                            <circle cx="12" cy="9" r="6" />
+                        </svg>
+                    </div>
+                    <div class="cert-body">
+                        <h4>Gemini AI Foundational Associate</h4>
+                        <p class="cert-sub">STAR Academy Program</p>
+                        <span class="cert-org">Google</span>
+                    </div>
+                </div>
+                <div class="cert-card" id="cert-4">
+                    <div class="cert-icon" style="--cert-color:#1ba0d7">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 15l-2 5l-1-3l-3-1l5-2z" />
+                            <path d="M12 15l2 5l1-3l3-1l-5-2z" />
+                            <circle cx="12" cy="9" r="6" />
+                        </svg>
+                    </div>
+                    <div class="cert-body">
+                        <h4>C Essentials – Part 1 & 2</h4>
+                        <p class="cert-sub">Programming Fundamentals</p>
+                        <span class="cert-org">Cisco</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CODING PROFILES ==================== -->
+    <section id="coding-profiles" class="section">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">04</span>
+                <h2 class="sec-title">Competitive <span style="color:var(--accent-cyan)">Programming</span></h2>
+                <p class="sec-sub">My coding profiles and problem-solving statistics</p>
+            </div>
+            <div class="cp-grid">
+                <!-- LeetCode -->
+                <div class="cp-card glass-panel" id="cp-leetcode">
+                    <div class="cp-header">
+                        <div class="cp-icon leetcode-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path
+                                    d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.543l5.997 5.608a5.259 5.259 0 0 0 7.31-.225l5.37-5.36a1.64 1.64 0 0 0 .461-1.298 1.636 1.636 0 0 0-.853-1.236 1.64 1.64 0 0 0-1.485-.1 1.624 1.624 0 0 0-.939.88l-4.52 4.512a2.808 2.808 0 0 1-3.905.122l-5.88-5.5a2.76 2.76 0 0 1-1.042-2.193 2.75 2.75 0 0 1 .808-2.022L12.445 4.39a2.81 2.81 0 0 1 3.96.066l1.24 1.229a1.636 1.636 0 0 0 2.29 0 1.635 1.635 0 0 0 0-2.316l-2.062-2.06A5.253 5.253 0 0 0 13.483 0zm-2.866 12.815a1.274 1.274 0 1 0 0 2.548h7.905a1.274 1.274 0 1 0 0-2.548H10.617z" />
+                            </svg>
+                        </div>
+                        <div class="cp-title">LeetCode</div>
+                    </div>
+                    <div class="cp-stats">
+                        <div class="cp-stat">
+                            <span class="cp-label">Rating</span>
+                            <span class="cp-value">1,578 <small style="color:var(--text-300); font-size:0.7em;">(Top
+                                    27%)</small></span>
+                        </div>
+                        <div class="cp-stat">
+                            <span class="cp-label">Solved</span>
+                            <span class="cp-value">206</span>
+                        </div>
+                        <div class="cp-stat">
+                            <span class="cp-label">Max Streak</span>
+                            <span class="cp-value">10 Days</span>
+                        </div>
+                    </div>
+                    <div class="cp-footer">
+                        <span class="cp-badge badge-leetcode">🏆 50 Days Badge 2025</span>
+                    </div>
+                </div>
+
+                <!-- CodeChef -->
+                <div class="cp-card glass-panel" id="cp-codechef">
+                    <div class="cp-header">
+                        <div class="cp-icon codechef-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 15.2L12 15l-3.8 2.2.8-4.2-3.2-3h4.4l1.8-4 1.8 4h4.4l-3.2 3 .8 4.2z" />
+                            </svg>
+                        </div>
+                        <div class="cp-title">CodeChef</div>
+                    </div>
+                    <div class="cp-stats">
+                        <div class="cp-stat">
+                            <span class="cp-label">Rating</span>
+                            <span class="cp-value">1356 <small style="color:var(--text-300); font-size:0.7em;">(Div
+                                    4)</small></span>
+                        </div>
+                        <div class="cp-stat">
+                            <span class="cp-label">Global Rank</span>
+                            <span class="cp-value">53583</span>
+                        </div>
+                        <div class="cp-stat">
+                            <span class="cp-label">Country Rank</span>
+                            <span class="cp-value">50345</span>
+                        </div>
+                    </div>
+                    <div class="cp-footer">
+                        <span class="cp-badge badge-codechef">⭐ 1 Star Coder</span>
+                    </div>
+                </div>
+
+                <!-- HackerRank -->
+                <div class="cp-card glass-panel" id="cp-hackerrank" style="grid-column: 1 / -1;">
+                    <div class="cp-header">
+                        <div class="cp-icon hackerrank-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path
+                                    d="M12 0L2.5 5.5v13L12 24l9.5-5.5v-13L12 0zm0 18.5L5.5 15V9l6.5-3.5L18.5 9v6l-6.5 3.5z" />
+                            </svg>
+                        </div>
+                        <div class="cp-title">HackerRank <small
+                                style="color:var(--text-300); font-size:0.7em; font-weight:normal; margin-left: 10px;">Hover
+                                badges to view stars</small></div>
+                    </div>
+                    <div class="hr-badges-grid">
+
+                        <!-- C Language -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fbbf24" />
+                                            <text x="64" y="85" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="55" fill="#000" text-anchor="middle">C</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">C Lang</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fbbf24">★★★★★</span>
+                                    <span class="flip-name">5 Stars</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Java -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fca5a5" />
+                                            <text x="64" y="78" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="30" fill="#000" text-anchor="middle">Java</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">Java</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fca5a5">★★★</span>
+                                    <span class="flip-name">3 Stars</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Problem Solving -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fdba74" />
+                                            <path d="M64 35 L64 65 M50 50 L78 50 M45 80 L83 80" stroke="#000"
+                                                stroke-width="8" stroke-linecap="round" />
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">Prob Solv</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fdba74">★★</span>
+                                    <span class="flip-name">2 Stars</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- C++ -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fca5a5" />
+                                            <text x="64" y="78" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="30" fill="#000" text-anchor="middle">C++</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">C++</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fca5a5">★</span>
+                                    <span class="flip-name">1 Star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Python -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fdba74" />
+                                            <text x="64" y="78" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="30" fill="#000" text-anchor="middle">Py</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">Python</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fdba74">★</span>
+                                    <span class="flip-name">1 Star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 30 Days of Code -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fdba74" />
+                                            <text x="64" y="82" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="40" fill="#000" text-anchor="middle">30</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">30 Days</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fdba74">★</span>
+                                    <span class="flip-name">1 Star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SQL -->
+                        <div class="flip-card hr-flip-card">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="flip-icon">
+                                        <svg viewBox="0 0 128 128" width="40" height="40">
+                                            <polygon points="64,2 118,33 118,95 64,126 10,95 10,33" fill="#fdba74" />
+                                            <text x="64" y="78" font-family="var(--ff-heading)" font-weight="bold"
+                                                font-size="30" fill="#000" text-anchor="middle">SQL</text>
+                                        </svg>
+                                    </div>
+                                    <span class="flip-name">SQL</span>
+                                </div>
+                                <div class="flip-back">
+                                    <span class="hr-stars" style="color:#fdba74">★</span>
+                                    <span class="flip-name">1 Star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="cp-footer" style="margin-top: 16px;">
+                        <span class="cp-badge badge-hackerrank">🏅 C# (Basic) Cert</span>
+                        <span class="cp-badge badge-hackerrank">🏅 SQL (Basic) Cert</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ACHIEVEMENTS ==================== -->
+    <section id="achievements" class="section section-alt">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">05</span>
+                <h2 class="sec-title">Achievements</h2>
+                <p class="sec-sub">Hackathons & competitions</p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card" id="achv-1">
+                    <div class="achv-trophy">🏆</div>
+                    <h4>Smart India Internal Hackathon</h4>
+                    <p>Selected for SIH 2024–25</p>
+                    <span class="achv-year">2024–25</span>
+                </div>
+                <div class="achievement-card" id="achv-2">
+                    <div class="achv-trophy">🥇</div>
+                    <h4>Google Hacksprint 2K25</h4>
+                    <p>Selected as Top 5 Team</p>
+                    <span class="achv-year">2025</span>
+                </div>
+                <div class="achievement-card" id="achv-3">
+                    <div class="achv-trophy">🥈</div>
+                    <h4>Tech Sprint — GDG Aditya University</h4>
+                    <p>Runner Up (Google Developer Groups)</p>
+                    <span class="achv-year">2025–26</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EXPERIENCE / EDUCATION ==================== -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">05</span>
+                <h2 class="sec-title">Journey</h2>
+                <p class="sec-sub">Education & project experience</p>
+            </div>
+            <div class="journey-grid">
+                <div class="journey-card jc-active" id="journey-1">
+                    <div class="jc-accent"></div>
+                    <div class="jc-header">
+                        <span class="jc-year">2024 — 2028</span>
+                        <span class="jc-badge-now">Current</span>
+                    </div>
+                    <h3 class="jc-title">B.Tech – Computer Science & Engineering</h3>
+                    <p class="jc-company">Aditya College of Engineering & Technology, Surampalem</p>
+                    <p class="jc-desc">Pursuing CSE with strong academic record (9.06 CGPA). Focused on Data Structures,
+                        Algorithms, Software Engineering, AI, and Web Technologies. Active in hackathons and coding
+                        competitions.</p>
+                    <div class="jc-tags">
+                        <span>CGPA: 9.06</span><span>DSA</span><span>OOP</span><span>DBMS</span><span>SDLC</span>
+                    </div>
+                </div>
+                <div class="journey-card" id="journey-2">
+                    <div class="jc-accent"></div>
+                    <div class="jc-header">
+                        <span class="jc-year">2024 — Present</span>
+                    </div>
+                    <h3 class="jc-title">Full-Stack Developer (Project Lead)</h3>
+                    <p class="jc-company">Grade Achiever & Coding Mastery Platform</p>
+                    <p class="jc-desc">Led the design and development of an AI-powered academic platform. Applied SDLC
+                        principles including requirement analysis, design, development, and testing. Coordinated team
+                        task allocation.</p>
+                    <div class="jc-tags">
+                        <span>Python</span><span>MongoDB</span><span>AI Analytics</span><span>Team Lead</span>
+                    </div>
+                </div>
+                <div class="journey-card" id="journey-3">
+                    <div class="jc-accent"></div>
+                    <div class="jc-header">
+                        <span class="jc-year">2025</span>
+                    </div>
+                    <h3 class="jc-title">Full-Stack Developer</h3>
+                    <p class="jc-company">Centralized Student Affairs Portal</p>
+                    <p class="jc-desc">Architected a full-stack dashboard with Flask & React.js for the Dean of Student
+                        Affairs. Built visual analytics, automated NAAC reporting, and RBAC-based access control.</p>
+                    <div class="jc-tags">
+                        <span>Flask</span><span>React.js</span><span>REST APIs</span><span>Chart.js</span>
+                    </div>
+                </div>
+                <div class="journey-card" id="journey-4">
+                    <div class="jc-accent"></div>
+                    <div class="jc-header">
+                        <span class="jc-year">2024 — 2025</span>
+                    </div>
+                    <h3 class="jc-title">Hackathon Competitor</h3>
+                    <p class="jc-company">SIH, Google Hacksprint, GDG Tech Sprint</p>
+                    <p class="jc-desc">Selected for Smart India Hackathon, placed Top 5 in Google Hacksprint, and won
+                        Runner Up at GDG Tech Sprint. Building innovative solutions under competitive pressure.</p>
+                    <div class="jc-tags">
+                        <span>Innovation</span><span>Teamwork</span><span>Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT (Mini) ==================== -->
+    <section id="about-mini" class="section section-alt">
+        <div class="container">
+            <div class="about-split">
+                <div class="about-code-block">
+                    <div class="code-top">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-file">manju.py</span>
+                    </div>
+                    <pre class="code-pre"><code><span class="ck">class</span> <span class="cv">ManjuMukesh</span>:
+    <span class="ck">def</span> <span class="cf">__init__</span>(<span class="cv">self</span>):
+        <span class="cv">self</span>.name = <span class="cs">"Dannina Manju Mukesh"</span>
+        <span class="cv">self</span>.role = <span class="cs">"CSE Undergrad & Developer"</span>
+        <span class="cv">self</span>.college = <span class="cs">"Aditya College of Eng."</span>
+        <span class="cv">self</span>.cgpa = <span class="cv">9.06</span>
+        <span class="cv">self</span>.batch = <span class="cs">"2024–2028"</span>
+        <span class="cv">self</span>.languages = [
+            <span class="cs">"Python"</span>, <span class="cs">"Java"</span>,
+            <span class="cs">"C/C++"</span>, <span class="cs">"JavaScript"</span>
+        ]
+        <span class="cv">self</span>.spoken = [
+            <span class="cs">"English"</span>, <span class="cs">"Hindi"</span>,
+            <span class="cs">"Telugu"</span>, <span class="cs">"Urdu"</span>
+        ]
+
+    <span class="ck">def</span> <span class="cf">goal</span>(<span class="cv">self</span>):
+        <span class="ck">return</span> <span class="cs">"Build AI-powered software
+        that makes a real impact!"</span></code></pre>
+                </div>
+                <div class="about-text-block">
+                    <h2 class="about-title">About Me</h2>
+                    <p>I'm <strong>Dannina Manju Mukesh</strong>, a detail-oriented Computer Science undergraduate with
+                        a strong academic foundation and hands-on experience in software development, AI-based systems,
+                        and full-stack web applications.</p>
+                    <p>I'm skilled in Python, Java, C/C++, JavaScript, React.js, Flask, and database-driven
+                        applications. I have a demonstrated ability in problem-solving, OOP, data handling, and project
+                        leadership — with a strong interest in Software Development, AI, and building real-world
+                        solutions.</p>
+                    <div class="about-highlights-row">
+                        <div class="about-hl">
+                            <span class="about-hl-icon">🎯</span>
+                            <span>Problem Solver</span>
+                        </div>
+                        <div class="about-hl">
+                            <span class="about-hl-icon">🚀</span>
+                            <span>Project Leader</span>
+                        </div>
+                        <div class="about-hl">
+                            <span class="about-hl-icon">🌐</span>
+                            <span>4 Languages</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-num">06</span>
+                <h2 class="sec-title">Contact</h2>
+                <p class="sec-sub">Let's connect and build something amazing</p>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-left">
+                    <div class="contact-info-card">
+                        <div class="cic-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Email</strong>
+                            <p>24P31a0585@acet.ac.in</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="cic-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Phone</strong>
+                            <p>+91 9490692101</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="cic-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Surampalem, Andhra Pradesh, India 🇮🇳</p>
+                        </div>
+                    </div>
+                    <div class="contact-socials">
+                        <a href="https://www.linkedin.com/in/manjumukeshdannina" target="_blank" class="c-social"
+                            id="contact-linkedin" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="c-social" id="contact-github"
+                            aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </svg>
+                        </a>
+                        <a href="mailto:24P31a0585@acet.ac.in" class="c-social" id="contact-email" aria-label="Email">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
+                    <input type="hidden" name="access_key" value="2c128972-6bff-4412-9634-73d8f4c212f7">
+                    <input type="checkbox" name="botcheck" style="display: none;">
+                    <div class="cf-row">
+                        <div class="cf-field">
+                            <input type="text" id="cf-name" name="name" required placeholder=" ">
+                            <label for="cf-name">Your Name</label>
+                        </div>
+                        <div class="cf-field">
+                            <input type="email" id="cf-email" name="email" required placeholder=" ">
+                            <label for="cf-email">Your Email</label>
+                        </div>
+                    </div>
+                    <div class="cf-row">
+                        <div class="cf-field">
+                            <input type="text" id="cf-subject" name="subject" placeholder=" ">
+                            <label for="cf-subject">Subject</label>
+                        </div>
+                        <div class="cf-field">
+                            <input type="tel" id="cf-phone" name="phone" placeholder=" ">
+                            <label for="cf-phone">Contact Number (optional)</label>
+                        </div>
+                    </div>
+                    <div class="cf-field">
+                        <textarea id="cf-message" name="message" rows="5" required placeholder=" "></textarea>
+                        <label for="cf-message">Message</label>
+                    </div>
+                    <button type="submit" class="btn-send" id="btn-send">
+                        <span>Send Message</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a href="#hero" class="footer-logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" stroke="currentColor"
+                            stroke-width="1.5" fill="none" />
+                        <polygon points="12,6 18,9.5 18,14.5 12,18 6,14.5 6,9.5" stroke="currentColor" stroke-width="1"
+                            fill="currentColor" opacity="0.3" />
+                    </svg>
+                </div>
+                <span>Manju Mukesh</span>
+            </a>
+            <p class="footer-text">Designed & built with ❤️ by <strong>Dannina Manju Mukesh</strong></p>
+            <p class="footer-copy">&copy; 2026 All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
