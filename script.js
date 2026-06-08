@@ -1,47 +1,49 @@
-/* ========================================
-   MANJU — Portfolio v4 (Premium Edition)
-   ======================================== */
+/* ═══════════════════════════════════════════════
+   MANJU MUKESH DANNINA — PORTFOLIO SCRIPT
+   Dark futuristic aesthetic with zero-G elements
+   ═══════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initPageLoader();
-    initParticles();
-    initCursorGlow();
+    initLoader();
+    initGeometricGrid();
     initCustomCursor();
     initNavbar();
     initMobileMenu();
-    initPillIndicator();
+    initNavIndicator();
     initScrollReveal();
+    initScrollProgress();
     initCountUp();
+    initTypewriter();
+    initPhotoTilt();
     initContactForm();
     initSmoothScroll();
-    initTypewriter();
-    init3DTilt();
-    initScrollProgress();
     initMagneticButtons();
     initBackToTop();
+    initCardSpotlight();
+    initRippleEffect();
 });
 
-/* ========================================
+/* ═══════════════════════════════════════════════
    PAGE LOADER
-   ======================================== */
-function initPageLoader() {
-    const loader = document.getElementById('page-loader');
+   ═══════════════════════════════════════════════ */
+function initLoader() {
+    const loader = document.getElementById('loader');
     if (!loader) return;
 
     const hide = () => {
         loader.classList.add('loaded');
-        setTimeout(() => loader.remove(), 800);
+        setTimeout(() => loader.remove(), 700);
     };
 
-    window.addEventListener('load', () => setTimeout(hide, 600));
-    setTimeout(() => { if (loader.parentNode) hide(); }, 3500);
+    window.addEventListener('load', () => setTimeout(hide, 800));
+    setTimeout(() => { if (loader.parentNode) hide(); }, 4000);
 }
 
-/* ========================================
-   INTERACTIVE PARTICLE NETWORK
-   ======================================== */
-function initParticles() {
-    const canvas = document.getElementById('particle-canvas');
+/* ═══════════════════════════════════════════════
+   GEOMETRIC GRID CANVAS — Subtle grid + particles
+   ═══════════════════════════════════════════════ */
+function initGeometricGrid() {
+    const canvas = document.getElementById('geo-canvas');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
@@ -50,66 +52,65 @@ function initParticles() {
     const mouse = { x: -9999, y: -9999 };
 
     const isMobile = window.innerWidth < 768;
-    const COUNT = isMobile ? 40 : 80;
-    const CONNECT = isMobile ? 100 : 150;
-    const MOUSE_R = 180;
-
-    const palette = [
-        { h: 210, s: 80, l: 60 }, // Blue
-        { h: 195, s: 85, l: 55 }, // Cyan
-        { h: 220, s: 70, l: 65 }, // Light Blue
-        { h: 180, s: 70, l: 50 }, // Teal
-        { h: 215, s: 60, l: 45 }, // Navy
-    ];
+    const PARTICLE_COUNT = isMobile ? 30 : 60;
+    const CONNECT_DIST = isMobile ? 100 : 160;
+    const MOUSE_RADIUS = 200;
 
     class Particle {
         constructor() {
             this.x = Math.random() * W;
             this.y = Math.random() * H;
-            this.vx = (Math.random() - 0.5) * 0.2;
-            this.vy = (Math.random() - 0.5) * 0.2;
-            this.r = Math.random() * 2 + 1;
-            this.c = palette[Math.floor(Math.random() * palette.length)];
-            this.a = Math.random() * 0.5 + 0.2;
-            this.ps = Math.random() * 0.02 + 0.01;
-            this.pp = Math.random() * Math.PI * 2;
+            this.vx = (Math.random() - 0.5) * 0.15;
+            this.vy = (Math.random() - 0.5) * 0.15;
+            this.r = Math.random() * 1.5 + 0.5;
+            this.alpha = Math.random() * 0.4 + 0.1;
+            this.hue = [185, 260, 45][Math.floor(Math.random() * 3)]; // cyan, violet, gold
+            this.pulseSpeed = Math.random() * 0.02 + 0.005;
+            this.pulseOffset = Math.random() * Math.PI * 2;
         }
 
         update(t) {
+            // Mouse repulsion
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
             const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < MOUSE_R && d > 0) {
-                const f = (MOUSE_R - d) / MOUSE_R;
-                this.vx += (dx / d) * f * 0.2;
-                this.vy += (dy / d) * f * 0.2;
+            if (d < MOUSE_RADIUS && d > 0) {
+                const f = (MOUSE_RADIUS - d) / MOUSE_RADIUS;
+                this.vx += (dx / d) * f * 0.15;
+                this.vy += (dy / d) * f * 0.15;
             }
-            this.vx *= 0.98;
-            this.vy *= 0.98;
+
+            this.vx *= 0.985;
+            this.vy *= 0.985;
+
             const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-            if (spd < 0.1) {
-                this.vx += (Math.random() - 0.5) * 0.04;
-                this.vy += (Math.random() - 0.5) * 0.04;
+            if (spd < 0.05) {
+                this.vx += (Math.random() - 0.5) * 0.03;
+                this.vy += (Math.random() - 0.5) * 0.03;
             }
+
             this.x += this.vx;
             this.y += this.vy;
-            if (this.x < -20) this.x = W + 20;
-            if (this.x > W + 20) this.x = -20;
-            if (this.y < -20) this.y = H + 20;
-            if (this.y > H + 20) this.y = -20;
-            this.a = 0.2 + Math.sin(t * this.ps + this.pp) * 0.15 + 0.15;
+
+            if (this.x < -30) this.x = W + 30;
+            if (this.x > W + 30) this.x = -30;
+            if (this.y < -30) this.y = H + 30;
+            if (this.y > H + 30) this.y = -30;
+
+            this.alpha = 0.15 + Math.sin(t * this.pulseSpeed + this.pulseOffset) * 0.1 + 0.1;
         }
 
         draw() {
-            const { h, s, l } = this.c;
+            // Core
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${h},${s}%,${l}%,${this.a})`;
+            ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
             ctx.fill();
-            // Glow
+
+            // Glow halo
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.r * 3, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${h},${s}%,${l}%,${this.a * 0.12})`;
+            ctx.arc(this.x, this.y, this.r * 4, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha * 0.08})`;
             ctx.fill();
         }
     }
@@ -117,7 +118,7 @@ function initParticles() {
     function resize() {
         W = canvas.width = window.innerWidth;
         H = canvas.height = window.innerHeight;
-        particles = Array.from({ length: COUNT }, () => new Particle());
+        particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
     }
 
     let t = 0;
@@ -125,38 +126,38 @@ function initParticles() {
         t++;
         ctx.clearRect(0, 0, W, H);
 
-        // Dark base
-        ctx.fillStyle = '#0b0b12';
+        // Deep space background
+        ctx.fillStyle = '#030711';
         ctx.fillRect(0, 0, W, H);
 
-        // Ambient glow
-        const g = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, Math.max(W, H) * 0.6);
-        g.addColorStop(0, 'rgba(124,92,252,0.06)');
-        g.addColorStop(0.3, 'rgba(244,114,182,0.04)');
-        g.addColorStop(0.6, 'rgba(34,211,238,0.02)');
-        g.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
+        // Subtle radial glow
+        const grd = ctx.createRadialGradient(W * 0.4, H * 0.35, 0, W * 0.4, H * 0.35, Math.max(W, H) * 0.6);
+        grd.addColorStop(0, 'rgba(0, 240, 255, 0.03)');
+        grd.addColorStop(0.3, 'rgba(139, 92, 246, 0.02)');
+        grd.addColorStop(0.6, 'rgba(251, 191, 36, 0.01)');
+        grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = grd;
         ctx.fillRect(0, 0, W, H);
 
-        // Connections
+        // Draw connections
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
                 const d = Math.sqrt(dx * dx + dy * dy);
-                if (d < CONNECT) {
-                    const alpha = (1 - d / CONNECT) * 0.12;
-                    const { h, s, l } = particles[i].c;
+                if (d < CONNECT_DIST) {
+                    const alpha = (1 - d / CONNECT_DIST) * 0.08;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `hsla(${h},${s}%,${l}%,${alpha})`;
+                    ctx.strokeStyle = `hsla(185, 70%, 55%, ${alpha})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
             }
         }
 
+        // Draw particles
         for (const p of particles) {
             p.update(t);
             p.draw();
@@ -168,122 +169,102 @@ function initParticles() {
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
     window.addEventListener('resize', resize);
+
     resize();
     requestAnimationFrame(draw);
 }
 
-/* ========================================
-   CURSOR GLOW
-   ======================================== */
-function initCursorGlow() {
-    const glow = document.getElementById('cursor-glow');
-    if (!glow) return;
-
-    let mx = 0, my = 0, gx = 0, gy = 0;
-
-    document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        glow.classList.add('active');
-    });
-    document.addEventListener('mouseleave', () => glow.classList.remove('active'));
-
-    (function anim() {
-        gx += (mx - gx) * 0.08;
-        gy += (my - gy) * 0.08;
-        glow.style.left = gx + 'px';
-        glow.style.top = gy + 'px';
-        requestAnimationFrame(anim);
-    })();
-}
-
-/* ========================================
+/* ═══════════════════════════════════════════════
    CUSTOM CURSOR
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initCustomCursor() {
-    const dot = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    if (!dot || !ring) return;
+    const cursor = document.getElementById('cursor');
+    const trail = document.getElementById('cursor-trail');
+    if (!cursor || !trail) return;
 
-    // Disable on touch devices
+    // Disable on touch
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        dot.style.display = 'none';
-        ring.style.display = 'none';
+        cursor.style.display = 'none';
+        trail.style.display = 'none';
         return;
     }
 
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    let mx = 0, my = 0, tx = 0, ty = 0;
 
     document.addEventListener('mousemove', e => {
         mx = e.clientX; my = e.clientY;
-        dot.style.left = mx + 'px';
-        dot.style.top = my + 'px';
+        cursor.style.left = mx + 'px';
+        cursor.style.top = my + 'px';
     });
 
-    (function animRing() {
-        rx += (mx - rx) * 0.15;
-        ry += (my - ry) * 0.15;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        requestAnimationFrame(animRing);
+    (function animTrail() {
+        tx += (mx - tx) * 0.12;
+        ty += (my - ty) * 0.12;
+        trail.style.left = tx + 'px';
+        trail.style.top = ty + 'px';
+        requestAnimationFrame(animTrail);
     })();
 
-    // Hover scaling via event delegation
+    // Hover effects via delegation
+    const hoverSelectors = 'a, button, .project, .service, .skill-pill, .concept-pill, .cert, .achievement, .journey__card, .social-link, .contact__card, input, textarea';
+
     document.addEventListener('mouseover', e => {
-        if (e.target.closest('a, button, .flip-card, .proj-card, .concept-pill, input, textarea, .cert-card, .achievement-card, .journey-card, .social-icon, .c-social')) {
-            dot.classList.add('cursor-hover');
-            ring.classList.add('cursor-hover');
+        if (e.target.closest(hoverSelectors)) {
+            cursor.classList.add('hover');
+            trail.classList.add('hover');
         }
     });
+
     document.addEventListener('mouseout', e => {
-        if (e.target.closest('a, button, .flip-card, .proj-card, .concept-pill, input, textarea, .cert-card, .achievement-card, .journey-card, .social-icon, .c-social')) {
-            dot.classList.remove('cursor-hover');
-            ring.classList.remove('cursor-hover');
+        if (e.target.closest(hoverSelectors)) {
+            cursor.classList.remove('hover');
+            trail.classList.remove('hover');
         }
     });
 }
 
-/* ========================================
+/* ═══════════════════════════════════════════════
    NAVBAR
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initNavbar() {
-    const navbar = document.getElementById('navbar');
-    const pills = document.querySelectorAll('.nav-pill');
+    const nav = document.getElementById('nav');
+    const links = document.querySelectorAll('.nav__link');
 
     window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
-        updateActivePill();
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+        updateActiveLink();
     });
 
-    function updateActivePill() {
+    function updateActiveLink() {
         const sections = document.querySelectorAll('.section, .hero');
         let current = 'hero';
 
         sections.forEach(sec => {
-            const top = sec.offsetTop - 120;
+            const top = sec.offsetTop - 140;
             if (window.scrollY >= top) {
                 current = sec.getAttribute('id');
             }
         });
 
-        pills.forEach(pill => {
-            pill.classList.toggle('active', pill.dataset.section === current);
+        links.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === current);
         });
 
-        movePillIndicator();
+        moveIndicator();
     }
 }
 
-/* ========================================
-   PILL INDICATOR
-   ======================================== */
-function initPillIndicator() {
-    movePillIndicator();
-    window.addEventListener('resize', movePillIndicator);
+/* ═══════════════════════════════════════════════
+   NAV INDICATOR
+   ═══════════════════════════════════════════════ */
+function initNavIndicator() {
+    moveIndicator();
+    window.addEventListener('resize', moveIndicator);
 }
 
-function movePillIndicator() {
-    const indicator = document.getElementById('pill-indicator');
-    const activeLink = document.querySelector('.nav-pill.active');
+function moveIndicator() {
+    const indicator = document.getElementById('nav-indicator');
+    const activeLink = document.querySelector('.nav__link.active');
     if (!indicator || !activeLink) return;
 
     const container = activeLink.parentElement;
@@ -294,13 +275,15 @@ function movePillIndicator() {
     indicator.style.left = (linkRect.left - containerRect.left) + 'px';
 }
 
-/* ========================================
+/* ═══════════════════════════════════════════════
    MOBILE MENU
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initMobileMenu() {
     const burger = document.getElementById('nav-burger');
     const menu = document.getElementById('mobile-menu');
-    const links = document.querySelectorAll('.mobile-link');
+    const links = document.querySelectorAll('.mobile-menu__link');
+
+    if (!burger || !menu) return;
 
     burger.addEventListener('click', () => {
         burger.classList.toggle('open');
@@ -315,25 +298,20 @@ function initMobileMenu() {
     });
 }
 
-/* ========================================
-   SCROLL REVEAL
-   ======================================== */
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL (Intersection Observer)
+   ═══════════════════════════════════════════════ */
 function initScrollReveal() {
-    const cards = document.querySelectorAll('.proj-card, .journey-card, .skill-group, .about-text-block, .cert-card, .achievement-card, .sec-header');
+    const elements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
+                // Stagger siblings
                 const parent = entry.target.parentElement;
-                const siblings = parent ? Array.from(parent.children).filter(el =>
-                    el.classList.contains('proj-card') ||
-                    el.classList.contains('journey-card') ||
-                    el.classList.contains('skill-group') ||
-                    el.classList.contains('cert-card') ||
-                    el.classList.contains('achievement-card')
-                ) : [];
-                const index = siblings.indexOf(entry.target);
-                const delay = index >= 0 ? index * 120 : 0;
+                const siblings = parent ? Array.from(parent.children).filter(el => el.classList.contains('reveal')) : [];
+                const idx = siblings.indexOf(entry.target);
+                const delay = idx >= 0 ? idx * 100 : 0;
 
                 setTimeout(() => {
                     entry.target.classList.add('visible');
@@ -343,18 +321,32 @@ function initScrollReveal() {
             }
         });
     }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -60px 0px'
     });
 
-    cards.forEach(card => observer.observe(card));
+    elements.forEach(el => observer.observe(el));
 }
 
-/* ========================================
-   COUNT UP
-   ======================================== */
+/* ═══════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+   ═══════════════════════════════════════════════ */
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+        const s = window.scrollY;
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
+    });
+}
+
+/* ═══════════════════════════════════════════════
+   COUNT UP ANIMATION
+   ═══════════════════════════════════════════════ */
 function initCountUp() {
-    const nums = document.querySelectorAll('.stat-num');
+    const nums = document.querySelectorAll('.hero__stat-num');
     let done = false;
 
     const observer = new IntersectionObserver((entries) => {
@@ -364,7 +356,7 @@ function initCountUp() {
                 nums.forEach(num => {
                     const isDecimal = num.dataset.decimal === 'true';
                     const target = parseFloat(num.dataset.target);
-                    const dur = 1800;
+                    const dur = 2000;
                     const start = performance.now();
 
                     function tick(now) {
@@ -373,11 +365,7 @@ function initCountUp() {
                         const eased = 1 - Math.pow(1 - progress, 3);
                         const current = eased * target;
 
-                        if (isDecimal) {
-                            num.textContent = current.toFixed(2);
-                        } else {
-                            num.textContent = Math.floor(current);
-                        }
+                        num.textContent = isDecimal ? current.toFixed(2) : Math.floor(current);
 
                         if (progress < 1) {
                             requestAnimationFrame(tick);
@@ -392,24 +380,84 @@ function initCountUp() {
         });
     }, { threshold: 0.5 });
 
-    const container = document.querySelector('.hero-stats');
+    const container = document.querySelector('.hero__stats');
     if (container) observer.observe(container);
 }
 
-/* ========================================
+/* ═══════════════════════════════════════════════
+   TYPEWRITER
+   ═══════════════════════════════════════════════ */
+function initTypewriter() {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
+
+    const words = [
+        'Full-Stack Web Apps.',
+        'AI-Powered Platforms.',
+        'Scalable REST APIs.',
+        'Beautiful User Interfaces.',
+        'Production-Ready Software.'
+    ];
+    let wi = 0, ci = 0, deleting = false;
+
+    function tick() {
+        const word = words[wi];
+        el.textContent = word.substring(0, deleting ? --ci : ++ci);
+
+        let delay = deleting ? 30 : 65;
+        if (!deleting && ci === word.length) {
+            delay = 2000;
+            deleting = true;
+        } else if (deleting && ci === 0) {
+            delay = 500;
+            deleting = false;
+            wi = (wi + 1) % words.length;
+        }
+
+        setTimeout(tick, delay);
+    }
+
+    setTimeout(tick, 1500);
+}
+
+/* ═══════════════════════════════════════════════
+   PHOTO 3D TILT
+   ═══════════════════════════════════════════════ */
+function initPhotoTilt() {
+    const wrap = document.querySelector('.hero__photo-wrapper');
+    if (!wrap || !window.matchMedia('(hover: hover)').matches) return;
+
+    wrap.addEventListener('mousemove', e => {
+        const r = wrap.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        wrap.style.transform = `perspective(1000px) rotateY(${x * 15}deg) rotateX(${-y * 15}deg) scale3d(1.04, 1.04, 1.04)`;
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+        wrap.style.transition = 'transform 0.5s ease';
+        wrap.style.transform = '';
+        setTimeout(() => { wrap.style.transition = ''; }, 500);
+    });
+
+    wrap.addEventListener('mouseenter', () => {
+        wrap.style.transition = 'none';
+    });
+}
+
+/* ═══════════════════════════════════════════════
    CONTACT FORM
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initContactForm() {
     const form = document.getElementById('contact-form');
     const btn = document.getElementById('btn-send');
-
     if (!form || !btn) return;
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const orig = btn.innerHTML;
-        btn.innerHTML = `<span>Sending...</span><div style="width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.5s linear infinite;"></div>`;
+        btn.innerHTML = `<span>Sending...</span><div style="width:18px;height:18px;border:2px solid rgba(0,240,255,0.3);border-top-color:var(--accent-cyan);border-radius:50%;animation:spin 0.5s linear infinite;"></div>`;
         btn.disabled = true;
 
         const formData = new FormData(form);
@@ -429,12 +477,10 @@ function initContactForm() {
             } else {
                 btn.innerHTML = `<span>Error! ❌</span>`;
                 btn.style.background = 'linear-gradient(135deg, #ef4444, #f87171)';
-                console.error("Web3Forms Error:", data);
             }
         } catch (error) {
             btn.innerHTML = `<span>Error! ❌</span>`;
             btn.style.background = 'linear-gradient(135deg, #ef4444, #f87171)';
-            console.error("Fetch Error:", error);
         }
 
         setTimeout(() => {
@@ -445,9 +491,9 @@ function initContactForm() {
     });
 }
 
-/* ========================================
+/* ═══════════════════════════════════════════════
    SMOOTH SCROLL
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -460,93 +506,18 @@ function initSmoothScroll() {
     });
 }
 
-/* ========================================
-   TYPEWRITER
-   ======================================== */
-function initTypewriter() {
-    const el = document.getElementById('typewriter');
-    if (!el) return;
-
-    const words = [
-        'Full-Stack Web Apps.',
-        'AI-Powered Platforms.',
-        'Scalable REST APIs.',
-        'Beautiful User Interfaces.',
-        'Production-Ready Software.'
-    ];
-    let wi = 0, ci = 0, deleting = false;
-
-    function tick() {
-        const word = words[wi];
-        el.textContent = word.substring(0, deleting ? --ci : ++ci);
-
-        let delay = deleting ? 35 : 75;
-        if (!deleting && ci === word.length) {
-            delay = 1800;
-            deleting = true;
-        } else if (deleting && ci === 0) {
-            delay = 400;
-            deleting = false;
-            wi = (wi + 1) % words.length;
-        }
-
-        setTimeout(tick, delay);
-    }
-
-    setTimeout(tick, 1200);
-}
-
-/* ========================================
-   3D TILT ON PHOTO
-   ======================================== */
-function init3DTilt() {
-    const wrap = document.querySelector('.hero-photo-wrapper');
-    if (!wrap || !window.matchMedia('(hover: hover)').matches) return;
-
-    wrap.addEventListener('mousemove', e => {
-        const r = wrap.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        wrap.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale3d(1.03,1.03,1.03)`;
-    });
-
-    wrap.addEventListener('mouseleave', () => {
-        wrap.style.transition = 'transform 0.5s ease';
-        wrap.style.transform = '';
-        setTimeout(() => { wrap.style.transition = ''; }, 500);
-    });
-
-    wrap.addEventListener('mouseenter', () => {
-        wrap.style.transition = 'none';
-    });
-}
-
-/* ========================================
-   SCROLL PROGRESS BAR
-   ======================================== */
-function initScrollProgress() {
-    const bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-
-    window.addEventListener('scroll', () => {
-        const s = window.scrollY;
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
-    });
-}
-
-/* ========================================
+/* ═══════════════════════════════════════════════
    MAGNETIC BUTTONS
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initMagneticButtons() {
     if (!window.matchMedia('(hover: hover)').matches) return;
 
-    document.querySelectorAll('.btn-cv, .btn-send, .social-icon, .c-social').forEach(btn => {
+    document.querySelectorAll('.btn, .social-link, .project__link').forEach(btn => {
         btn.addEventListener('mousemove', e => {
             const r = btn.getBoundingClientRect();
             const x = e.clientX - r.left - r.width / 2;
             const y = e.clientY - r.top - r.height / 2;
-            const strength = (btn.classList.contains('btn-cv') || btn.classList.contains('btn-send')) ? 0.2 : 0.3;
+            const strength = btn.classList.contains('btn') ? 0.2 : 0.3;
             btn.style.translate = `${x * strength}px ${y * strength}px`;
         });
         btn.addEventListener('mouseleave', () => {
@@ -555,9 +526,9 @@ function initMagneticButtons() {
     });
 }
 
-/* ========================================
+/* ═══════════════════════════════════════════════
    BACK TO TOP
-   ======================================== */
+   ═══════════════════════════════════════════════ */
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
@@ -571,13 +542,50 @@ function initBackToTop() {
     });
 }
 
-/* ========================================
-   INJECT KEYFRAMES
-   ======================================== */
-const injectedStyles = document.createElement('style');
-injectedStyles.textContent = `
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(injectedStyles);
+/* ═══════════════════════════════════════════════
+   CARD SPOTLIGHT (Follow cursor glow)
+   ═══════════════════════════════════════════════ */
+function initCardSpotlight() {
+    const cards = document.querySelectorAll('.project, .service, .journey__card, .cert, .achievement, .contact__card');
+
+    cards.forEach(card => {
+        const spotlight = document.createElement('div');
+        spotlight.classList.add('card-spotlight');
+        card.style.position = 'relative';
+        card.appendChild(spotlight);
+
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            spotlight.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(0, 240, 255, 0.04), rgba(139, 92, 246, 0.02), transparent 50%)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            spotlight.style.background = 'transparent';
+        });
+    });
+}
+
+/* ═══════════════════════════════════════════════
+   RIPPLE EFFECT ON BUTTONS
+   ═══════════════════════════════════════════════ */
+function initRippleEffect() {
+    const buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+}
