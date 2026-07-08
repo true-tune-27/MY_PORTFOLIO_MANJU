@@ -10,10 +10,21 @@
         content="Manju Mukesh, Dannina, developer, portfolio, CSE, full stack, AI, Python, React, Full-Stack Developer">
     <meta name="author" content="Dannina Manju Mukesh">
     <title>MANJU MUKESH DANNINA — Developer Portfolio</title>
+    <!-- Apply saved theme before paint to prevent flash -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -76,9 +87,20 @@
                 <a href="#contact" class="nav__link" data-section="contact">Contact</a>
                 <div class="nav__indicator" id="nav-indicator"></div>
             </div>
-            <button class="nav__burger" id="nav-burger" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+            <div class="nav__right">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light / dark theme" title="Toggle theme">
+                    <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+                <button class="nav__burger" id="nav-burger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -197,7 +219,7 @@
                     </div>
                     <div class="hero__stat-sep"></div>
                     <div class="hero__stat">
-                        <span class="hero__stat-num" data-target="5">0</span><span class="hero__stat-suffix">+</span>
+                        <span class="hero__stat-num" data-target="7">0</span><span class="hero__stat-suffix">+</span>
                         <span class="hero__stat-label">Certifications</span>
                     </div>
                     <div class="hero__stat-sep"></div>
@@ -331,15 +353,38 @@
                     <article class="journey__card reveal" id="journey-2">
                         <div class="journey__card-accent"></div>
                         <div class="journey__card-header">
-                            <span class="journey__card-year">2024 — Present</span>
+                            <span class="journey__card-year">May — Jun 2026</span>
+                            <span class="journey__card-badge">Internship</span>
                         </div>
-                        <h4 class="journey__card-title">Full-Stack Developer (Project Lead)</h4>
-                        <p class="journey__card-org">Grade Achiever & Coding Mastery Platform</p>
-                        <p class="journey__card-desc">Led the design and development of an AI-powered academic platform.
-                            Applied SDLC principles including requirement analysis, design, development, and testing.
-                        </p>
+                        <h4 class="journey__card-title">Full-Stack Developer Intern</h4>
+                        <p class="journey__card-org">Technical Hub Pvt. Ltd.</p>
+                        <p class="journey__card-desc">Completed a summer internship in Full-Stack Development, building
+                            production-style applications across the MERN stack — React for interactive UIs, Express.js
+                            REST APIs, and MongoDB. Recognised for responsibility, sincerity and a strong willingness to
+                            learn. <span style="color:var(--text-400);">Intern ID: THSI260810</span></p>
                         <div class="journey__card-tags">
-                            <span>Python</span><span>MongoDB</span><span>AI Analytics</span><span>Team Lead</span>
+                            <span>React</span><span>Express.js</span><span>MongoDB</span><span>REST APIs</span>
+                        </div>
+                        <div class="journey__card-certs">
+                            <button class="journey__card-cert journey__card-cert--view"
+                                data-cert="certificates/technical-hub-internship.pdf"
+                                data-cert-title="Technical Hub — Internship Certificate">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                View
+                            </button>
+                            <a class="journey__card-cert" href="certificates/technical-hub-internship.pdf" download>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download
+                            </a>
                         </div>
                     </article>
                     <article class="journey__card reveal" id="journey-3">
@@ -589,7 +634,9 @@
                     <span class="skill-pill" data-level="85">JavaScript</span>
                     <span class="skill-pill" data-level="80">React.js</span>
                     <span class="skill-pill" data-level="78">Node.js</span>
+                    <span class="skill-pill" data-level="76">Express.js</span>
                     <span class="skill-pill" data-level="88">Flask</span>
+                    <span class="skill-pill" data-level="74">Spring Boot</span>
                     <span class="skill-pill" data-level="88">MongoDB</span>
                     <span class="skill-pill" data-level="92">HTML5</span>
                     <span class="skill-pill" data-level="90">CSS3</span>
@@ -619,68 +666,239 @@
 
             <!-- Certifications -->
             <div class="certs reveal">
-                <h3 class="skills__heading">Certifications</h3>
-                <div class="certs__grid">
-                    <div class="cert" id="cert-1">
-                        <div class="cert__icon" style="--cert-color: #f80000">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path d="M12 15l-2 5-1-3-3-1 5-2z" />
-                                <path d="M12 15l2 5 1-3 3-1-5-2z" />
-                                <circle cx="12" cy="9" r="6" />
-                            </svg>
+                <h3 class="skills__heading">Certifications &amp; Badges</h3>
+                <div class="certgrid">
+
+                    <!-- 1. Oracle OCI AI Foundations -->
+                    <article class="certcard" style="--brand:#c74634">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/oci-ai-foundations.png"
+                                    alt="Oracle OCI AI Foundations badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Cloud &amp; AI</span>
                         </div>
-                        <div class="cert__body">
-                            <h4>Oracle Java Foundations</h4>
-                            <p>Foundations Associate</p>
-                            <span>Oracle</span>
+                        <h4 class="certcard__title">Oracle Cloud Infrastructure 2025 — Certified AI Foundations
+                            Associate</h4>
+                        <p class="certcard__issuer">Oracle University</p>
+                        <p class="certcard__meta">Issued Sep 2025 · Valid to Sep 2027</p>
+                        <div class="certcard__actions">
+                            <button class="certcard__btn certcard__btn--view"
+                                data-cert="certificates/oracle-oci-ai-foundations.pdf"
+                                data-cert-title="Oracle Cloud Infrastructure 2025 — AI Foundations Associate">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>View</button>
+                            <a class="certcard__btn certcard__btn--download"
+                                href="certificates/oracle-oci-ai-foundations.pdf" download>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>Certificate</a>
                         </div>
-                    </div>
-                    <div class="cert" id="cert-2">
-                        <div class="cert__icon" style="--cert-color: #4285f4">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path d="M12 15l-2 5-1-3-3-1 5-2z" />
-                                <path d="M12 15l2 5 1-3 3-1-5-2z" />
-                                <circle cx="12" cy="9" r="6" />
-                            </svg>
+                    </article>
+
+                    <!-- 2. Oracle Data Platform Foundations -->
+                    <article class="certcard" style="--brand:#c74634">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/oracle-data-platform.png"
+                                    alt="Oracle Data Platform Foundations badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Data &amp; Cloud</span>
                         </div>
-                        <div class="cert__body">
-                            <h4>Google AI Professional</h4>
-                            <p>Professional Certificate</p>
-                            <span>Google</span>
+                        <h4 class="certcard__title">Oracle Data Platform 2025 — Certified Foundations Associate</h4>
+                        <p class="certcard__issuer">Oracle University</p>
+                        <p class="certcard__meta">Issued May 2026 · Valid to May 2028</p>
+                        <div class="certcard__actions">
+                            <button class="certcard__btn certcard__btn--view"
+                                data-cert="certificates/oracle-data-platform.pdf"
+                                data-cert-title="Oracle Data Platform 2025 — Foundations Associate">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>View</button>
+                            <a class="certcard__btn certcard__btn--download"
+                                href="certificates/oracle-data-platform.pdf" download>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>Certificate</a>
                         </div>
-                    </div>
-                    <div class="cert" id="cert-3">
-                        <div class="cert__icon" style="--cert-color: #0530ad">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path d="M12 15l-2 5-1-3-3-1 5-2z" />
-                                <path d="M12 15l2 5 1-3 3-1-5-2z" />
-                                <circle cx="12" cy="9" r="6" />
-                            </svg>
+                    </article>
+
+                    <!-- 3. Oracle Java Foundations -->
+                    <article class="certcard" style="--brand:#c74634">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/oracle-java.png"
+                                    alt="Oracle Java Foundations badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Programming</span>
                         </div>
-                        <div class="cert__body">
-                            <h4>IBM Java Developer</h4>
-                            <p>Professional Certificate</p>
-                            <span>IBM</span>
+                        <h4 class="certcard__title">Oracle Certified Foundations Associate — Java</h4>
+                        <p class="certcard__issuer">Oracle University</p>
+                        <p class="certcard__meta">Issued May 2026</p>
+                        <div class="certcard__actions">
+                            <button class="certcard__btn certcard__btn--view"
+                                data-cert="certificates/oracle-java-foundations.pdf"
+                                data-cert-title="Oracle Certified Foundations Associate — Java">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>View</button>
+                            <a class="certcard__btn certcard__btn--download"
+                                href="certificates/oracle-java-foundations.pdf" download>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>Certificate</a>
                         </div>
-                    </div>
-                    <div class="cert" id="cert-4">
-                        <div class="cert__icon" style="--cert-color: #f80000">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path d="M12 15l-2 5-1-3-3-1 5-2z" />
-                                <path d="M12 15l2 5 1-3 3-1-5-2z" />
-                                <circle cx="12" cy="9" r="6" />
-                            </svg>
+                    </article>
+
+                    <!-- 4. Google AI Professional -->
+                    <article class="certcard" style="--brand:#4285f4">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/google-ai.png"
+                                    alt="Google AI Professional badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Artificial Intelligence</span>
                         </div>
-                        <div class="cert__body">
-                            <h4>Oracle Cloud Infrastructure 2025</h4>
-                            <p>Certified AI Foundations Associate</p>
-                            <span>Oracle</span>
+                        <h4 class="certcard__title">Google AI Professional Certificate</h4>
+                        <p class="certcard__issuer">Google · Coursera</p>
+                        <p class="certcard__meta">Issued Jun 2026 · 7 courses</p>
+                        <div class="certcard__actions">
+                            <a class="certcard__btn"
+                                href="https://coursera.org/verify/professional-cert/9DY1HJX29D1U" target="_blank"
+                                rel="noopener">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>Verify</a>
                         </div>
-                    </div>
+                    </article>
+
+                    <!-- 5. IT Specialist HTML & CSS -->
+                    <article class="certcard" style="--brand:#e34c26">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/it-specialist-html-css.png"
+                                    alt="IT Specialist HTML and CSS badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Web Development</span>
+                        </div>
+                        <h4 class="certcard__title">IT Specialist — HTML &amp; CSS</h4>
+                        <p class="certcard__issuer">Pearson · Certiport</p>
+                        <p class="certcard__meta">Issued Jul 2025 · Valid 5 yrs</p>
+                        <div class="certcard__actions">
+                            <button class="certcard__btn certcard__btn--view"
+                                data-cert="certificates/it-specialist-html-css.pdf"
+                                data-cert-title="IT Specialist — HTML &amp; CSS">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>View</button>
+                            <a class="certcard__btn certcard__btn--download"
+                                href="certificates/it-specialist-html-css.pdf" download>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>Certificate</a>
+                            <a class="certcard__btn" href="https://verify.certiport.com" target="_blank" rel="noopener">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>Verify</a>
+                        </div>
+                    </article>
+
+                    <!-- 6. Gemini AI Foundational -->
+                    <article class="certcard" style="--brand:#7c3aed">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/gemini-ai.png"
+                                    alt="Gemini AI Foundational badge" loading="lazy"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Artificial Intelligence</span>
+                        </div>
+                        <h4 class="certcard__title">Gemini AI Foundational Associate</h4>
+                        <p class="certcard__issuer">Google · STAR Academy</p>
+                        <p class="certcard__meta">Foundational credential</p>
+                    </article>
+
+                    <!-- 7. Cisco C Essentials -->
+                    <article class="certcard" style="--brand:#1ba0d7">
+                        <div class="certcard__top">
+                            <div class="certcard__badge">
+                                <svg class="certcard__seal" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.4">
+                                    <circle cx="12" cy="8" r="6" />
+                                    <path d="M8.5 13.7 7 22l5-3 5 3-1.5-8.3" />
+                                </svg>
+                                <img class="certcard__badge-img" src="badges/c-essentials.png"
+                                    alt="Cisco C Essentials badge" loading="lazy" onerror="this.style.display='none'">
+                            </div>
+                            <span class="certcard__type">Programming</span>
+                        </div>
+                        <h4 class="certcard__title">C Essentials 1 &amp; 2</h4>
+                        <p class="certcard__issuer">Cisco Networking Academy</p>
+                        <p class="certcard__meta">Programming fundamentals</p>
+                    </article>
+
                 </div>
             </div>
 
@@ -892,6 +1110,108 @@
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>
+
+    <!-- ═══════════════════════════════════════
+         AI ASSISTANT
+         ═══════════════════════════════════════ -->
+    <!-- Launcher button -->
+    <button class="ai-fab" id="ai-fab" aria-label="Open AI assistant">
+        <span class="ai-fab__pulse"></span>
+        <svg class="ai-fab__icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8V4H8" />
+            <rect x="4" y="8" width="16" height="12" rx="2" />
+            <path d="M2 14h2" /><path d="M20 14h2" />
+            <path d="M15 13v2" /><path d="M9 13v2" />
+        </svg>
+        <svg class="ai-fab__icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+        <span class="ai-fab__badge" id="ai-fab-badge">1</span>
+    </button>
+
+    <!-- Chat panel -->
+    <div class="ai-chat" id="ai-chat" role="dialog" aria-label="AI assistant chat" aria-hidden="true">
+        <div class="ai-chat__header">
+            <div class="ai-chat__avatar">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 8V4H8" />
+                    <rect x="4" y="8" width="16" height="12" rx="2" />
+                    <path d="M2 14h2" /><path d="M20 14h2" />
+                    <path d="M15 13v2" /><path d="M9 13v2" />
+                </svg>
+                <span class="ai-chat__status-dot"></span>
+            </div>
+            <div class="ai-chat__ident">
+                <strong>Manju's AI Assistant</strong>
+                <span><span class="ai-chat__online-dot"></span>Online · Ask me anything</span>
+            </div>
+            <button class="ai-chat__close" id="ai-chat-close" aria-label="Close chat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="ai-chat__body" id="ai-chat-body">
+            <!-- messages injected here -->
+        </div>
+
+        <div class="ai-chat__suggestions" id="ai-chat-suggestions"></div>
+
+        <form class="ai-chat__input" id="ai-chat-form">
+            <input type="text" id="ai-chat-text" placeholder="Ask about my projects, skills…" autocomplete="off" aria-label="Type your message">
+            <button type="submit" class="ai-chat__send" aria-label="Send message">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </form>
+        <div class="ai-chat__footer">Built-in assistant · trained on Manju's portfolio</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         CERTIFICATE VIEWER (modal)
+         ═══════════════════════════════════════ -->
+    <div class="cert-viewer" id="cert-viewer" aria-hidden="true">
+        <div class="cert-viewer__backdrop" data-cert-close></div>
+        <div class="cert-viewer__panel" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+            <div class="cert-viewer__bar">
+                <span class="cert-viewer__title" id="cert-viewer-title">Certificate</span>
+                <div class="cert-viewer__tools">
+                    <a class="cert-viewer__tool" id="cert-viewer-open" href="#" target="_blank" rel="noopener"
+                        title="Open in new tab">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg><span>Open</span></a>
+                    <a class="cert-viewer__tool" id="cert-viewer-dl" href="#" download title="Download">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg><span>Download</span></a>
+                    <button class="cert-viewer__close" id="cert-viewer-close" aria-label="Close viewer"
+                        data-cert-close>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="cert-viewer__stage">
+                <iframe id="cert-viewer-frame" title="Certificate document"></iframe>
+                <div class="cert-viewer__fallback" id="cert-viewer-fallback">
+                    <p>This certificate file isn't available yet.</p>
+                    <span>Add the file to the project's <code>certificates/</code> folder to preview it here.</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

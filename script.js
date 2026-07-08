@@ -4,6 +4,8 @@
    ═══════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initThemeToggle();
+    initCertViewer();
     initLoader();
     initGeometricGrid();
     initCustomCursor();
@@ -21,7 +23,96 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initCardSpotlight();
     initRippleEffect();
+    initAIAssistant();
 });
+
+/* ═══════════════════════════════════════════════
+   THEME TOGGLE (light / dark, persisted)
+   ═══════════════════════════════════════════════ */
+function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    // Ensure an explicit theme is set (head script normally does this)
+    if (!root.getAttribute('data-theme')) root.setAttribute('data-theme', 'light');
+
+    function apply(theme) {
+        root.setAttribute('data-theme', theme);
+        try { localStorage.setItem('theme', theme); } catch (e) { /* ignore */ }
+    }
+
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        apply(current === 'dark' ? 'light' : 'dark');
+    });
+}
+
+/* ═══════════════════════════════════════════════
+   CERTIFICATE VIEWER (in-page modal)
+   ═══════════════════════════════════════════════ */
+function initCertViewer() {
+    const modal = document.getElementById('cert-viewer');
+    if (!modal) return;
+
+    const frame = document.getElementById('cert-viewer-frame');
+    const titleEl = document.getElementById('cert-viewer-title');
+    const openLink = document.getElementById('cert-viewer-open');
+    const dlLink = document.getElementById('cert-viewer-dl');
+
+    function open(path, title) {
+        titleEl.textContent = title || 'Certificate';
+        openLink.href = path;
+        dlLink.href = path;
+        frame.src = '';
+        modal.classList.remove('show-fallback');
+
+        if (location.protocol === 'file:') {
+            // Local preview: fetch/HEAD is unreliable, so load the PDF directly
+            // and let the browser's built-in viewer render it.
+            frame.src = path;
+        } else {
+            // Served over http(s): verify the file exists so we can show a
+            // friendly message instead of a broken frame for missing files.
+            fetch(path, { method: 'HEAD' })
+                .then(res => {
+                    if (res.ok) { frame.src = path; }
+                    else { modal.classList.add('show-fallback'); }
+                })
+                .catch(() => { frame.src = path; });
+        }
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // Stop the PDF from playing/loading in the background
+        setTimeout(() => { frame.src = ''; }, 300);
+    }
+
+    // Open from any element carrying data-cert
+    document.querySelectorAll('[data-cert]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            open(btn.getAttribute('data-cert'), btn.getAttribute('data-cert-title'));
+        });
+    });
+
+    // Close via backdrop / close button
+    modal.querySelectorAll('[data-cert-close]').forEach(el => {
+        el.addEventListener('click', close);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+}
 
 /* ═══════════════════════════════════════════════
    PAGE LOADER
@@ -49,6 +140,7 @@ function initGeometricGrid() {
     const ctx = canvas.getContext('2d');
     let W, H;
     let particles = [];
+    let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const mouse = { x: -9999, y: -9999 };
 
     const isMobile = window.innerWidth < 768;
@@ -64,7 +156,7 @@ function initGeometricGrid() {
             this.vy = (Math.random() - 0.5) * 0.15;
             this.r = Math.random() * 1.5 + 0.5;
             this.alpha = Math.random() * 0.4 + 0.1;
-            this.hue = [185, 260, 45][Math.floor(Math.random() * 3)]; // cyan, violet, gold
+            this.hue = [245, 258, 199][Math.floor(Math.random() * 3)]; // indigo, violet, sky
             this.pulseSpeed = Math.random() * 0.02 + 0.005;
             this.pulseOffset = Math.random() * Math.PI * 2;
         }
@@ -101,16 +193,17 @@ function initGeometricGrid() {
         }
 
         draw() {
+            const L = isDark ? 70 : 55;
             // Core
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha})`;
+            ctx.fillStyle = `hsla(${this.hue}, 75%, ${L}%, ${this.alpha})`;
             ctx.fill();
 
             // Glow halo
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r * 4, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.alpha * 0.08})`;
+            ctx.fillStyle = `hsla(${this.hue}, 75%, ${L}%, ${this.alpha * (isDark ? 0.1 : 0.06)})`;
             ctx.fill();
         }
     }
@@ -124,18 +217,26 @@ function initGeometricGrid() {
     let t = 0;
     function draw() {
         t++;
+        isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         ctx.clearRect(0, 0, W, H);
 
-        // Deep space background
-        ctx.fillStyle = '#030711';
+        // Theme-aware background
+        ctx.fillStyle = isDark ? '#0a0e17' : '#ffffff';
         ctx.fillRect(0, 0, W, H);
 
-        // Subtle radial glow
+        // Subtle radial tint
         const grd = ctx.createRadialGradient(W * 0.4, H * 0.35, 0, W * 0.4, H * 0.35, Math.max(W, H) * 0.6);
-        grd.addColorStop(0, 'rgba(0, 240, 255, 0.03)');
-        grd.addColorStop(0.3, 'rgba(139, 92, 246, 0.02)');
-        grd.addColorStop(0.6, 'rgba(251, 191, 36, 0.01)');
-        grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        if (isDark) {
+            grd.addColorStop(0, 'rgba(129, 140, 248, 0.07)');
+            grd.addColorStop(0.35, 'rgba(167, 139, 250, 0.04)');
+            grd.addColorStop(0.65, 'rgba(56, 189, 248, 0.025)');
+            grd.addColorStop(1, 'rgba(10, 14, 23, 0)');
+        } else {
+            grd.addColorStop(0, 'rgba(79, 70, 229, 0.035)');
+            grd.addColorStop(0.35, 'rgba(124, 58, 237, 0.02)');
+            grd.addColorStop(0.65, 'rgba(56, 189, 248, 0.012)');
+            grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        }
         ctx.fillStyle = grd;
         ctx.fillRect(0, 0, W, H);
 
@@ -146,12 +247,12 @@ function initGeometricGrid() {
                 const dy = particles[i].y - particles[j].y;
                 const d = Math.sqrt(dx * dx + dy * dy);
                 if (d < CONNECT_DIST) {
-                    const alpha = (1 - d / CONNECT_DIST) * 0.08;
+                    const alpha = (1 - d / CONNECT_DIST) * (isDark ? 0.16 : 0.12);
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `hsla(185, 70%, 55%, ${alpha})`;
-                    ctx.lineWidth = 0.5;
+                    ctx.strokeStyle = `hsla(245, 65%, ${isDark ? 70 : 55}%, ${alpha})`;
+                    ctx.lineWidth = 0.6;
                     ctx.stroke();
                 }
             }
@@ -457,7 +558,7 @@ function initContactForm() {
         e.preventDefault();
 
         const orig = btn.innerHTML;
-        btn.innerHTML = `<span>Sending...</span><div style="width:18px;height:18px;border:2px solid rgba(0,240,255,0.3);border-top-color:var(--accent-cyan);border-radius:50%;animation:spin 0.5s linear infinite;"></div>`;
+        btn.innerHTML = `<span>Sending...</span><div style="width:18px;height:18px;border:2px solid rgba(255,255,255,0.4);border-top-color:#ffffff;border-radius:50%;animation:spin 0.5s linear infinite;"></div>`;
         btn.disabled = true;
 
         const formData = new FormData(form);
@@ -558,7 +659,7 @@ function initCardSpotlight() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            spotlight.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(0, 240, 255, 0.04), rgba(139, 92, 246, 0.02), transparent 50%)`;
+            spotlight.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.025), transparent 50%)`;
         });
 
         card.addEventListener('mouseleave', () => {
@@ -587,5 +688,361 @@ function initRippleEffect() {
             this.appendChild(ripple);
             setTimeout(() => ripple.remove(), 600);
         });
+    });
+}
+
+/* ═══════════════════════════════════════════════
+   AI ASSISTANT — Built-in knowledge engine
+   A lightweight intent-matching chatbot trained on
+   Manju's portfolio. No API keys, works offline.
+   ═══════════════════════════════════════════════ */
+function initAIAssistant() {
+    const fab = document.getElementById('ai-fab');
+    const chat = document.getElementById('ai-chat');
+    const closeBtn = document.getElementById('ai-chat-close');
+    const body = document.getElementById('ai-chat-body');
+    const form = document.getElementById('ai-chat-form');
+    const input = document.getElementById('ai-chat-text');
+    const suggestionsBar = document.getElementById('ai-chat-suggestions');
+    const badge = document.getElementById('ai-fab-badge');
+    if (!fab || !chat || !body || !form) return;
+
+    /* ── Knowledge base ── */
+    const KB = {
+        name: 'Dannina Manju Mukesh',
+        projects: [
+            {
+                id: 'proj-1',
+                name: 'SkillStack AI — Career Launchpad',
+                tag: 'Full-Stack AI Platform',
+                summary: `<strong>SkillStack AI</strong> is a full-stack placement-preparation platform built on <strong>11 Flask Blueprint modules</strong>. It bundles AI mock interviews, an ATS resume builder, coding assessments, and live job discovery — all powered by <strong>Google Gemini</strong> with a 4-tier AI fallback (Gemini → OpenAI → OpenRouter → NVIDIA) so it never goes down.`,
+                highlights: [
+                    'MediaPipe FaceMesh for real-time biometric interview analytics',
+                    '5-step RAG pipeline hitting 88–98% ATS resume compatibility',
+                    'Firebase Phone OTP, SHA-256 hashing & 20+ pytest tests'
+                ],
+                stack: 'Python, Flask, MongoDB Atlas, Gemini AI, Firebase, React.js, MediaPipe, LangChain'
+            },
+            {
+                id: 'proj-2',
+                name: 'Centralized Student Affairs & Club Portal',
+                tag: 'Administrative Dashboard',
+                summary: `A full-stack <strong>administrative dashboard</strong> he architected for the Dean of Student Affairs — centralizing club management, extension activities and SAC operations with role-based access.`,
+                highlights: [
+                    'Chart.js analytics with real-time filtering',
+                    'RBAC — permission-scoped views for Dean & Coordinators',
+                    'Automated NAAC-compliant PDF/Excel reporting'
+                ],
+                stack: 'Python, Flask, React.js, Tailwind CSS, MongoDB, Chart.js, SheetJS'
+            },
+            {
+                id: 'proj-3',
+                name: 'Premium Developer Portfolio',
+                tag: 'Web Application',
+                summary: `The interactive portfolio you're viewing right now — a hand-built, corporate-ready site with a custom particle engine, custom cursor, glassmorphism UI and 3D tilt effects, all in vanilla JS.`,
+                highlights: [
+                    'Custom vanilla-JS particle physics engine on Canvas',
+                    'Advanced CSS3 animations & design tokens',
+                    'Fully responsive with smooth micro-interactions'
+                ],
+                stack: 'HTML5, CSS3, Vanilla JS, Canvas API'
+            }
+        ],
+        skills: {
+            languages: ['Python', 'Java', 'C / C++', 'JavaScript'],
+            frontend: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS'],
+            backend: ['Flask', 'Node.js', 'Express.js', 'Spring Boot', 'REST APIs', 'MongoDB', 'Firebase'],
+            ai: ['Google Gemini', 'LangChain (RAG)', 'MediaPipe', 'AI Analytics'],
+            concepts: ['DSA', 'OOP', 'DBMS', 'SDLC']
+        },
+        achievements: [
+            '🏆 Selected for Smart India Hackathon (SIH) 2024–25',
+            '🥇 Top 5 Team — Google Hacksprint 2K25',
+            '🥈 Runner Up — Tech Sprint, GDG Aditya University 2025–26'
+        ],
+        certs: [
+            'Oracle Cloud Infrastructure 2025 — AI Foundations Associate (Oracle)',
+            'Oracle Data Platform 2025 — Foundations Associate (Oracle)',
+            'Oracle Certified Foundations Associate — Java (Oracle)',
+            'Google AI Professional Certificate (Google · Coursera)',
+            'IT Specialist — HTML & CSS (Pearson · Certiport)',
+            'Gemini AI Foundational Associate (Google · STAR Academy)',
+            'C Essentials 1 & 2 (Cisco)'
+        ],
+        internship: `<strong>Full-Stack Developer Intern</strong> at <strong>Technical Hub Pvt. Ltd.</strong> (summer 2026) — built MERN-stack applications using React, Express.js and MongoDB. Intern ID: THSI260810.`,
+        education: `He's a <strong>CSE undergraduate</strong> at Aditya College of Engineering & Technology, Surampalem (batch 2024–2028), holding a strong <strong>9.10 CGPA</strong>. He speaks English, Hindi, Telugu & Urdu.`,
+        contact: {
+            email: '24P31a0585@acet.ac.in',
+            phone: '+91 9490692101',
+            location: 'Surampalem, Andhra Pradesh, India',
+            linkedin: 'https://www.linkedin.com/in/manjumukeshdannina',
+            github: 'https://github.com/true-tune-27'
+        }
+    };
+
+    /* ── Response builders ── */
+    function projectsOverview() {
+        const list = KB.projects.map(p =>
+            `<li><strong>${p.name}</strong> — ${p.tag}</li>`).join('');
+        return {
+            html: `Manju has shipped <strong>${KB.projects.length} major projects</strong>. Here's the lineup:<ul>${list}</ul>Tap one below for a deep dive 👇`,
+            actions: KB.projects.map(p => ({ label: p.name.split('—')[0].trim(), q: p.name }))
+                .concat([{ label: '📂 See all in page', scroll: 'projects' }])
+        };
+    }
+
+    function projectDetail(p) {
+        const hl = p.highlights.map(h => `<li>${h}</li>`).join('');
+        return {
+            html: `${p.summary}<br><br><strong>Key highlights:</strong><ul>${hl}</ul><strong>Stack:</strong> ${p.stack}`,
+            actions: [
+                { label: '🔎 View in portfolio', scroll: p.id },
+                { label: '↩ Other projects', q: 'show me the projects' }
+            ]
+        };
+    }
+
+    function skillsOverview() {
+        const s = KB.skills;
+        return {
+            html: `Manju is a <strong>full-stack developer & AI enthusiast</strong>. His toolkit:` +
+                `<br><br>💻 <strong>Languages:</strong> ${s.languages.join(', ')}` +
+                `<br>🎨 <strong>Frontend:</strong> ${s.frontend.join(', ')}` +
+                `<br>⚙️ <strong>Backend:</strong> ${s.backend.join(', ')}` +
+                `<br>🧠 <strong>AI / ML:</strong> ${s.ai.join(', ')}` +
+                `<br>📚 <strong>CS core:</strong> ${s.concepts.join(', ')}`,
+            actions: [{ label: '🛠 View skills section', scroll: 'skills' }, { label: '🚀 His projects', q: 'projects' }]
+        };
+    }
+
+    function achievementsOverview() {
+        const list = KB.achievements.map(a => `<li>${a}</li>`).join('');
+        return {
+            html: `Here's what Manju has earned so far:<ul>${list}</ul>He also holds certifications from <strong>Oracle, Google, Pearson & Cisco</strong>.`,
+            actions: [{ label: '🏅 View achievements', scroll: 'skills' }, { label: '📜 Certifications', q: 'certifications' }]
+        };
+    }
+
+    function certsOverview() {
+        const list = KB.certs.map(c => `<li>${c}</li>`).join('');
+        return {
+            html: `Manju holds <strong>${KB.certs.length} certifications</strong> spanning cloud, AI, web & programming:<ul>${list}</ul>You can view the official badges and <strong>download each certificate</strong> in the Certifications section 👇`,
+            actions: [{ label: '📜 View badges & downloads', scroll: 'skills' }]
+        };
+    }
+
+    function aboutOverview() {
+        return {
+            html: `${KB.education}<br><br>He's a detail-oriented problem solver with hands-on experience in software development, AI systems and full-stack web apps — and has led project teams from requirements through deployment.`,
+            actions: [{ label: '👤 About section', scroll: 'about' }, { label: '💼 Experience', q: 'experience' }]
+        };
+    }
+
+    function experienceOverview() {
+        return {
+            html: `Manju's hands-on experience:<ul>` +
+                `<li><strong>Full-Stack Developer Intern</strong> — Technical Hub Pvt. Ltd. (summer 2026): React, Express.js & MongoDB</li>` +
+                `<li><strong>Full-Stack Developer</strong> — Centralized Student Affairs Portal (Flask + React, analytics & RBAC)</li>` +
+                `<li><strong>Hackathon Competitor</strong> — SIH, Google Hacksprint, GDG Tech Sprint</li></ul>` +
+                `His internship certificate is downloadable in the Journey & Experience section.`,
+            actions: [{ label: '🧭 View journey', scroll: 'about' }, { label: '📜 Certifications', q: 'certifications' }]
+        };
+    }
+
+    function contactOverview() {
+        const c = KB.contact;
+        return {
+            html: `You can reach Manju here:<br><br>📧 <a href="mailto:${c.email}">${c.email}</a>` +
+                `<br>📱 ${c.phone}<br>📍 ${c.location}` +
+                `<br>💼 <a href="${c.linkedin}" target="_blank">LinkedIn</a>` +
+                ` &nbsp;·&nbsp; 💻 <a href="${c.github}" target="_blank">GitHub</a>`,
+            actions: [{ label: '✉️ Open contact form', scroll: 'contact' }, { label: '📄 View CV', href: 'Manju_Mukesh_Resume_ATS.pdf' }]
+        };
+    }
+
+    function hireOverview() {
+        return {
+            html: `Absolutely — Manju is <strong>open to internships & opportunities</strong>! He brings full-stack skills (Python/Flask, React, MongoDB), real AI integration experience (Gemini, RAG, MediaPipe), a 9.10 CGPA and proven project leadership. Shall I point you to his CV or contact details?`,
+            actions: [{ label: '📄 View CV', href: 'Manju_Mukesh_Resume_ATS.pdf' }, { label: '✉️ Contact him', q: 'contact' }]
+        };
+    }
+
+    function greeting() {
+        return {
+            html: `Hi there! 👋 I'm Manju's AI assistant. I can brief you on his <strong>projects</strong>, <strong>skills</strong>, <strong>experience</strong>, <strong>achievements</strong> or how to <strong>get in touch</strong>. What would you like to know?`,
+            actions: [{ label: '🚀 Projects', q: 'projects' }, { label: '🛠 Skills', q: 'skills' }, { label: '📬 Contact', q: 'contact' }]
+        };
+    }
+
+    function fallback() {
+        return {
+            html: `I'm not totally sure about that one 🤔 — but I know Manju's portfolio inside out! Try asking about his <strong>projects</strong>, <strong>skills</strong>, <strong>AI work</strong>, <strong>achievements</strong>, <strong>education</strong> or <strong>contact</strong> info.`,
+            actions: [{ label: '🚀 Projects', q: 'projects' }, { label: '🛠 Skills', q: 'skills' }, { label: '📬 Contact', q: 'contact' }]
+        };
+    }
+
+    /* ── Intent matching ── */
+    function respond(raw) {
+        const t = ' ' + raw.toLowerCase().replace(/[^\w\s]/g, ' ') + ' ';
+        const has = (...words) => words.some(w => t.includes(w));
+
+        // Specific project match first
+        for (const p of KB.projects) {
+            const key = p.name.toLowerCase();
+            if (t.includes(key) || (key.includes('skillstack') && has('skillstack', 'skill stack', 'launchpad', 'career')) ||
+                (p.id === 'proj-2' && has('student affairs', 'club portal', 'dashboard', 'naac', 'dean')) ||
+                (p.id === 'proj-3' && has('portfolio website', 'this site', 'this website'))) {
+                return projectDetail(p);
+            }
+        }
+
+        if (has('hi', 'hello', 'hey', 'yo', 'greetings', 'namaste')) return greeting();
+        if (has('hire', 'recruit', 'internship', 'job', 'available', 'opportunit', 'why should')) return hireOverview();
+        if (has('project', 'projects', 'work', 'portfolio', 'built', 'build', 'app', 'apps')) return projectsOverview();
+        if (has('ai', 'ml', 'machine learning', 'gemini', 'llm', 'rag', 'langchain', 'mediapipe')) return skillsOverview();
+        if (has('skill', 'skills', 'tech', 'stack', 'technolog', 'language', 'languages', 'framework', 'know', 'good at')) return skillsOverview();
+        if (has('achieve', 'award', 'hackathon', 'win', 'won', 'prize', 'sih')) return achievementsOverview();
+        if (has('cert', 'certification', 'certificate', 'oracle', 'course')) return certsOverview();
+        if (has('experience', 'work experience', 'intern', 'lead', 'led', 'role')) return experienceOverview();
+        if (has('about', 'who is', 'who s', 'yourself', 'education', 'college', 'cgpa', 'study', 'degree', 'background')) return aboutOverview();
+        if (has('contact', 'email', 'phone', 'reach', 'linkedin', 'github', 'connect', 'hire him', 'get in touch', 'cv', 'resume')) return contactOverview();
+        if (has('thank', 'thanks', 'thx', 'cool', 'awesome', 'nice', 'great')) {
+            return { html: `You're welcome! 😊 Anything else you'd like to know about Manju?`, actions: [{ label: '🚀 Projects', q: 'projects' }, { label: '📬 Contact', q: 'contact' }] };
+        }
+
+        return fallback();
+    }
+
+    /* ── Rendering ── */
+    function scrollBottom() { body.scrollTop = body.scrollHeight; }
+
+    const BOT_AVATAR = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>`;
+
+    function addUser(text) {
+        const el = document.createElement('div');
+        el.className = 'ai-msg ai-msg--user';
+        el.innerHTML = `<div class="ai-msg__bubble"></div>`;
+        el.querySelector('.ai-msg__bubble').textContent = text;
+        body.appendChild(el);
+        scrollBottom();
+    }
+
+    function addBot(res) {
+        const el = document.createElement('div');
+        el.className = 'ai-msg ai-msg--bot';
+        let actionsHtml = '';
+        if (res.actions && res.actions.length) {
+            actionsHtml = `<div class="ai-msg__actions">` + res.actions.map((a, i) =>
+                `<button class="ai-msg__action" data-idx="${i}">${a.label}</button>`).join('') + `</div>`;
+        }
+        el.innerHTML = `<div class="ai-msg__avatar">${BOT_AVATAR}</div><div class="ai-msg__bubble">${res.html}${actionsHtml}</div>`;
+
+        // Wire action buttons
+        if (res.actions) {
+            el.querySelectorAll('.ai-msg__action').forEach(btn => {
+                const a = res.actions[+btn.dataset.idx];
+                btn.addEventListener('click', () => {
+                    if (a.scroll) {
+                        closePanel();
+                        const target = document.getElementById(a.scroll);
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (a.href) {
+                        window.open(a.href, '_blank');
+                    } else if (a.q) {
+                        handleUserInput(a.q, a.label.replace(/^[^\w]+/, '').trim());
+                    }
+                });
+            });
+        }
+        body.appendChild(el);
+        scrollBottom();
+    }
+
+    function showTyping() {
+        const el = document.createElement('div');
+        el.className = 'ai-msg ai-msg--bot ai-typing';
+        el.id = 'ai-typing';
+        el.innerHTML = `<div class="ai-msg__avatar">${BOT_AVATAR}</div><div class="ai-typing__bubble"><span></span><span></span><span></span></div>`;
+        body.appendChild(el);
+        scrollBottom();
+    }
+
+    function hideTyping() {
+        const el = document.getElementById('ai-typing');
+        if (el) el.remove();
+    }
+
+    /* ── Conversation flow ── */
+    function handleUserInput(query, displayText) {
+        addUser(displayText || query);
+        showTyping();
+        const delay = 500 + Math.random() * 500;
+        setTimeout(() => {
+            hideTyping();
+            addBot(respond(query));
+        }, delay);
+    }
+
+    const SUGGESTIONS = [
+        { label: '🚀 His projects', q: 'Tell me about his projects' },
+        { label: '🛠 Skills & stack', q: 'What are his skills?' },
+        { label: '🧠 AI work', q: 'Tell me about his AI work' },
+        { label: '🏆 Achievements', q: 'What are his achievements?' },
+        { label: '🎓 About him', q: 'Tell me about him' },
+        { label: '📬 Contact', q: 'How can I contact him?' },
+        { label: '💼 Is he open to work?', q: 'Is he available to hire?' }
+    ];
+
+    function renderSuggestions() {
+        suggestionsBar.innerHTML = '';
+        SUGGESTIONS.forEach(s => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'ai-suggestion';
+            b.textContent = s.label;
+            b.addEventListener('click', () => handleUserInput(s.q, s.label.replace(/^[^\w]+/, '').trim()));
+            suggestionsBar.appendChild(b);
+        });
+    }
+
+    /* ── Open / close ── */
+    let greeted = false;
+    function openPanel() {
+        chat.classList.add('open');
+        fab.classList.add('open');
+        chat.setAttribute('aria-hidden', 'false');
+        badge.classList.add('hidden');
+        if (!greeted) {
+            greeted = true;
+            renderSuggestions();
+            showTyping();
+            setTimeout(() => { hideTyping(); addBot(greeting()); }, 700);
+        }
+        setTimeout(() => input.focus(), 350);
+    }
+
+    function closePanel() {
+        chat.classList.remove('open');
+        fab.classList.remove('open');
+        chat.setAttribute('aria-hidden', 'true');
+    }
+
+    function togglePanel() {
+        chat.classList.contains('open') ? closePanel() : openPanel();
+    }
+
+    fab.addEventListener('click', togglePanel);
+    closeBtn.addEventListener('click', closePanel);
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (!val) return;
+        input.value = '';
+        handleUserInput(val);
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && chat.classList.contains('open')) closePanel();
     });
 }
