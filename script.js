@@ -724,6 +724,19 @@ function initAIAssistant() {
                 stack: 'Python, Flask, MongoDB Atlas, Gemini AI, Firebase, React.js, MediaPipe, LangChain'
             },
             {
+                id: 'proj-railmind',
+                name: 'RailMind AI — Intelligent Railway Operations',
+                tag: 'Full-Stack AI System — Indian Railways',
+                summary: `<strong>RailMind AI</strong> is a domain-specific AI system with <strong>7 specialized engines</strong> for automatic block planning to maximize asset availability for Indian Railways. Built for <strong>SIH 2026 (Problem 26027)</strong> — replacing manual, phone-call-driven processes with AI-optimized, conflict-free maintenance scheduling across 13,000+ daily trains.`,
+                highlights: [
+                    '7 AI Engines: XGBoost + CP-SAT + LSTM + CSP + Game Theory + NLP + Anomaly Detection',
+                    'Optimizes 200+ tasks in <3 seconds with zero train conflicts',
+                    'Multi-agent Nash Equilibrium negotiation for 3 railway departments',
+                    'Hindi/English NLP commands via Qwen3-235B with regex fallback'
+                ],
+                stack: 'Python, FastAPI, React 19, PyTorch, XGBoost, OR-Tools, PostgreSQL, Redis, Docker'
+            },
+            {
                 id: 'proj-2',
                 name: 'Centralized Student Affairs & Club Portal',
                 tag: 'Administrative Dashboard',
@@ -890,6 +903,7 @@ function initAIAssistant() {
         for (const p of KB.projects) {
             const key = p.name.toLowerCase();
             if (t.includes(key) || (key.includes('skillstack') && has('skillstack', 'skill stack', 'launchpad', 'career')) ||
+                (key.includes('railmind') && has('railmind', 'rail mind', 'railway', 'block plan', 'sih 2026', 'problem 26027', 'indian railway')) ||
                 (p.id === 'proj-2' && has('student affairs', 'club portal', 'dashboard', 'naac', 'dean')) ||
                 (p.id === 'proj-3' && has('portfolio website', 'this site', 'this website'))) {
                 return projectDetail(p);

@@ -1348,6 +1348,7 @@ button { font-family: var(--ff-body); cursor: pointer; }
 
 .project__badge--featured { border-color: rgba(79, 70, 229, 0.3); color: var(--accent); }
 .project__badge--ai { border-color: rgba(124, 58, 237, 0.3); color: var(--accent-2); }
+.project__badge--sih { border-color: rgba(16, 185, 129, 0.3); color: var(--accent-green); background: rgba(16, 185, 129, 0.08); }
 
 .project__content {
     position: relative;
@@ -1445,6 +1446,20 @@ button { font-family: var(--ff-body); cursor: pointer; }
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-cyan-dim);
+    transform: translateY(-2px);
+}
+
+.project__link--live {
+    background: var(--gradient-accent);
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.project__link--live:hover {
+    background: var(--gradient-accent);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: var(--glow-sm);
     transform: translateY(-2px);
 }
 
